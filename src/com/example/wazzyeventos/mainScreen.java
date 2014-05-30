@@ -2,7 +2,6 @@ package com.example.wazzyeventos;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,46 +13,34 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends ActionBarActivity {
+public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_login, bt_cadastrar, bt_logout;
+	public Button bt_cadastrar, bt_logout;
 	public EditText et_login, et_senha;
-	public Intent mainclassI;
-	public AlertDialog alertDialog;
+	public Intent mainActI;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_main);
+		setContentView(R.layout.mainscreen);
 		
 		//Sets das instancias do XML
-		this.bt_login = (Button) this.findViewById(R.id.bt_login);
-		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar);
+		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
+		this.mainActI = new Intent(this, MainActivity.class);
 		
-		this.et_login = (EditText) this.findViewById(R.id.et_login);
-		this.et_senha = (EditText) this.findViewById(R.id.et_senha);
-		this.mainclassI = new Intent(this,mainScreen.class);
+		this.bt_logout.setOnClickListener(login_cadastro);
 		
-		//PopUp erro
-		this.alertDialog = new AlertDialog.Builder(this).create();
-		this.alertDialog.setTitle("Title");
-		this.alertDialog.setMessage("Message");
-		
-		bt_login.setOnClickListener(login_cadastro);
 	}
+		
 	
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_login){
-				if(et_login.getText().equals("qwerty"))
-					startActivity(mainclassI);
-			}
-			else{
-				alertDialog.show();
-			}
+			if(v == bt_logout)
+				startActivity(mainActI);
+			
 		}
-	};
+	}; 
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,4 +79,3 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 }
-

@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainScreen"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
+
+    <Button
+        android:id="@+id/bt_criar_evento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Criar Evento" />
+
+    <Button
+        android:id="@+id/bt_consultar_evento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Consultar Eventos" />
+
+    <Button
+        android:id="@+id/bt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout" />
+
+    <Button
+        android:id="@+id/bt_sair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sair" />
+
+</LinearLayout>
