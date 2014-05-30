@@ -3,6 +3,7 @@ package com.example.wazzyeventos;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -38,20 +39,17 @@ public class MainActivity extends ActionBarActivity {
 		this.alertDialog = new AlertDialog.Builder(this).create();
 		this.alertDialog.setTitle("Title");
 		this.alertDialog.setMessage("Message");
-		
+
 		bt_login.setOnClickListener(login_cadastro);
+		
 	}
 	
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
 			if(v == bt_login){
-				if(et_login.getText().equals("qwerty"))
 					startActivity(mainclassI);
-			}
-			else{
-				alertDialog.show();
-			}
+		}
 		}
 	};
 	
