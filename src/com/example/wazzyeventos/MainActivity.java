@@ -3,7 +3,6 @@ package com.example.wazzyeventos;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,7 +47,10 @@ public class MainActivity extends ActionBarActivity {
 		
 		public void onClick(View v) {
 			if(v == bt_login){
+				if(et_login.getText().toString().equals("admin") && et_senha.getText().toString().equals("admin123"))
 					startActivity(mainclassI);
+				else
+					System.out.println("Erro de login!");
 		}
 		}
 	};

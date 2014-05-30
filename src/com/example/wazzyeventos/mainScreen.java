@@ -37,8 +37,7 @@ public class mainScreen extends ActionBarActivity {
 		
 		public void onClick(View v) {
 			if(v == bt_logout)
-				startActivity(mainActI);
-			
+					startActivity(mainActI);
 		}
 	}; 
 	
