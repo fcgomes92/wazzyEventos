@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.wazzyeventos.mainScreen"/>
+        <activity android:name="com.example.wazzyeventos.telaDeCadastro"/>
     </application>
 
 </manifest>
