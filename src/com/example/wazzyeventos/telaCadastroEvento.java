@@ -13,25 +13,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class mainScreen extends ActionBarActivity {
+public class telaCadastroEvento extends ActionBarActivity {
 	
-	public Button bt_criar_evento, bt_logout;
-	public Intent mainActI;
-	public Intent cadastrarEvento;
+	public Button bt_cadastrar, bt_cancelar;
+	public Intent mainScreen;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mainscreen);
+		setContentView(R.layout.telacadastroevento);
 		
 		//Sets das instancias do XML
-		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
-		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
-		this.mainActI = new Intent(this, MainActivity.class);
-		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
+		this.bt_cancelar= (Button) this.findViewById(R.id.bt_cancelar_evento);
+		this.mainScreen = new Intent(this, mainScreen.class);
 		
-		this.bt_logout.setOnClickListener(login_cadastro);
-		this.bt_criar_evento.setOnClickListener(login_cadastro);
+		this.bt_cancelar.setOnClickListener(login_cadastro);
 		
 	}
 		
@@ -39,10 +35,8 @@ public class mainScreen extends ActionBarActivity {
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_logout)
-				startActivity(mainActI);
-			if(v == bt_criar_evento)
-				startActivity(cadastrarEvento);
+			if(v == bt_cancelar)
+					startActivity(mainScreen);
 		}
 	}; 
 	
