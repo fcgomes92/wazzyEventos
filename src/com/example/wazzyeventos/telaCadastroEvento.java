@@ -13,38 +13,37 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class mainScreen extends ActionBarActivity {
+public class telaCadastroEvento extends ActionBarActivity {
 	
-	public Button bt_cadastrar_evento, bt_logout;
-	public Intent mainActI, cadastrarEvento;
+	public Button bt_cadastrar, bt_cancelar;
+	public EditText field_nome, field_local, field_desc;
+	public Intent telaUsuario;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.mainscreen);
+		setContentView(R.layout.cadastroevento);
 		
 		//Sets das instancias do XML
-		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
-		this.bt_cadastrar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
-		this.mainActI = new Intent(this, MainActivity.class);
-		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
+		this.bt_cancelar = (Button) this.findViewById(R.id.bt_evento_cancelar);
+		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_evento_cadastrar);
+		this.telaUsuario = new Intent(this, mainScreen.class);
 		
-		this.bt_logout.setOnClickListener(login_cadastro);
-		this.bt_cadastrar_evento.setOnClickListener(login_cadastro);
+		this.bt_cancelar.setOnClickListener(handler);
 		
 	}
 		
 	
-	public OnClickListener login_cadastro = new OnClickListener() {
+	public OnClickListener handler = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_logout){
-				startActivity(mainActI);
+			if(v == bt_cancelar)
+					startActivity(telaUsuario);
+			if(v == bt_cadastrar){
+				//verifica campos vazios
+				//insere no bd
+			}
 		}
-			if(v == bt_cadastrar_evento){
-				startActivity(cadastrarEvento);
-		}
-	}
 	}; 
 	
 	@Override
