@@ -15,8 +15,9 @@ import android.widget.EditText;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_cadastrar_evento, bt_logout;
-	public Intent mainActI, cadastrarEvento;
+	public Button bt_cadastrar, bt_logout;
+	public EditText et_login, et_senha;
+	public Intent mainActI;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +26,9 @@ public class mainScreen extends ActionBarActivity {
 		
 		//Sets das instancias do XML
 		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
-		this.bt_cadastrar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
 		this.mainActI = new Intent(this, MainActivity.class);
-		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
 		
 		this.bt_logout.setOnClickListener(login_cadastro);
-		this.bt_cadastrar_evento.setOnClickListener(login_cadastro);
 		
 	}
 		
@@ -38,13 +36,9 @@ public class mainScreen extends ActionBarActivity {
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_logout){
-				startActivity(mainActI);
+			if(v == bt_logout)
+					startActivity(mainActI);
 		}
-			if(v == bt_cadastrar_evento){
-				startActivity(cadastrarEvento);
-		}
-	}
 	}; 
 	
 	@Override

@@ -11,34 +11,16 @@
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
 
     <Button
-        android:id="@+id/bt_criar_evento_ms"
+        android:id="@+id/bt_criar_evento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Criar Evento" />
 
     <Button
-        android:id="@+id/bt_meus_eventos_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Meus Eventos" />
-
-    <Button
-        android:id="@+id/bt_consultar_evento_ms"
+        android:id="@+id/bt_consultar_evento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Consultar Eventos" />
-
-    <Button
-        android:id="@+id/bt_consultar_usuario_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Consultar Usuários" />
-
-    <Button
-        android:id="@+id/bt_del_conta_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Deletar Conta" />
 
     <Button
         android:id="@+id/bt_logout"

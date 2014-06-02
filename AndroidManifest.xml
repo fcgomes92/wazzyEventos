@@ -24,7 +24,6 @@
         </activity>
         <activity android:name="com.example.wazzyeventos.mainScreen"/>
         <activity android:name="com.example.wazzyeventos.telaDeCadastro"/>
-        <activity android:name="com.example.wazzyeventos.telaCadastroEvento"/>
     </application>
 
 </manifest>
