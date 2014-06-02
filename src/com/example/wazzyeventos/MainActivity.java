@@ -30,18 +30,13 @@ public class MainActivity extends ActionBarActivity {
 		this.bt_login = (Button) this.findViewById(R.id.bt_login);
 		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar);
 		
-		this.et_login = (EditText) this.findViewById(R.id.et_login);
 		this.et_senha = (EditText) this.findViewById(R.id.et_senha);
+		this.et_login = (EditText) this.findViewById(R.id.et_login);
 		this.mainclassI = new Intent(this,mainScreen.class);
 		this.cadastroUserI = new Intent(this,telaDeCadastro.class);
 		
-		//PopUp erro
-		this.alertDialog = new AlertDialog.Builder(this).create();
-		this.alertDialog.setTitle("Title");
-		this.alertDialog.setMessage("Message");
-
-		bt_login.setOnClickListener(login_cadastro);
-		bt_cadastrar.setOnClickListener(login_cadastro);
+		this.bt_login.setOnClickListener(login_cadastro);
+		this.bt_cadastrar.setOnClickListener(login_cadastro);
 	}
 	
 	public OnClickListener login_cadastro = new OnClickListener() {

@@ -10,46 +10,74 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
 
-    <Button
-        android:id="@+id/bt_criar_evento_ms"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Criar Evento" />
+        android:layout_height="wrap_content" >
 
-    <Button
-        android:id="@+id/bt_meus_eventos_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Meus Eventos" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|center_vertical|center_horizontal"
+            android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bt_consultar_evento_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Consultar Eventos" />
+            <ImageView
+                android:id="@+id/logo_ms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center|center_horizontal"
+                android:src="@drawable/ic_launcher" />
 
-    <Button
-        android:id="@+id/bt_consultar_usuario_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Consultar Usuários" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bt_del_conta_ms"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Deletar Conta" />
+            </LinearLayout>
 
-    <Button
-        android:id="@+id/bt_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout" />
+            <Button
+                android:id="@+id/bt_criar_evento_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Criar Evento" />
 
-    <Button
-        android:id="@+id/bt_sair"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sair" />
+            <Button
+                android:id="@+id/bt_meus_eventos_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meus Eventos" />
+
+            <Button
+                android:id="@+id/bt_consultar_evento_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consultar Eventos" />
+
+            <Button
+                android:id="@+id/bt_consultar_usuario_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consultar Usuários" />
+
+            <Button
+                android:id="@+id/bt_meu_perfil_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meu perfil" />
+
+            <Button
+                android:id="@+id/bt_del_conta_ms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Deletar Conta" />
+
+            <Button
+                android:id="@+id/bt_logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
