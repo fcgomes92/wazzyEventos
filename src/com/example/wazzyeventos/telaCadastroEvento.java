@@ -14,7 +14,7 @@ import android.widget.Button;
 
 public class telaCadastroEvento extends ActionBarActivity {
 	
-	public Button bt_cadastrar, bt_cancelar;
+	public Button bt_cadastrar;
 	public Intent mainScreen;
 	
 	@Override
@@ -23,19 +23,13 @@ public class telaCadastroEvento extends ActionBarActivity {
 		setContentView(R.layout.telacadastroevento);
 		
 		//Sets das instancias do XML
-		this.bt_cancelar= (Button) this.findViewById(R.id.bt_cancelar_evento);
-		this.mainScreen = new Intent(this, mainScreen.class);
-		
-		this.bt_cancelar.setOnClickListener(login_cadastro);
-		
+		this.mainScreen = new Intent(this, mainScreen.class);	
 	}
 		
 	
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_cancelar)
-					startActivity(mainScreen);
 		}
 	}; 
 	

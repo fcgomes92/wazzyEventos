@@ -15,7 +15,7 @@ import android.widget.EditText;
 
 public class telaDeCadastro extends ActionBarActivity {
 	
-	public Button bt_cadastrar, bt_cancelar;
+	public Button bt_cadastrar;
 	public EditText field_login, field_senha, field_nome;
 	public Intent mainActI;
 	
@@ -25,20 +25,14 @@ public class telaDeCadastro extends ActionBarActivity {
 		setContentView(R.layout.cadastrousuario);
 		
 		//Sets das instancias do XML
-		this.bt_cancelar = (Button) this.findViewById(R.id.bt_cancelar_cadastro);
 		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar_cadastro);
 		this.mainActI = new Intent(this, MainActivity.class);
-		
-		this.bt_cancelar.setOnClickListener(handler);
-		
 	}
 		
 	
 	public OnClickListener handler = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_cancelar)
-					startActivity(mainActI);
 			if(v == bt_cadastrar){
 				//verifica campos vazios
 				//insere no bd

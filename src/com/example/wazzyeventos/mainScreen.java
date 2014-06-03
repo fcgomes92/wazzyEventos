@@ -15,9 +15,8 @@ import android.widget.Button;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento, bt_logout;
-	public Intent mainActI;
-	public Intent cadastrarEvento;
+	public Button bt_criar_evento, bt_consultarEvento, bt_consultar_Usuario;
+	public Intent mainActI, cadastrarEvento, consultarEventoInt, consultarUsuarioInt;
 	public String login;
 	
 	@Override
@@ -26,30 +25,39 @@ public class mainScreen extends ActionBarActivity {
 		setContentView(R.layout.mainscreen);
 		
 		//Sets das instancias do XML
-		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
+		this.bt_consultarEvento = (Button) this.findViewById(R.id.bt_consultar_evento_ms);
+		this.bt_consultar_Usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
 		
 		//Atividades
 		this.mainActI = new Intent(this, MainActivity.class);
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
+		this.consultarEventoInt = new Intent(this, telaConsultaEvento.class);
+		this.consultarUsuarioInt = new Intent(this, telaConsultaUsuario.class);
 		
 		//Login do usuario logado
 		this.login = getIntent().getExtras().getString("login");
 		Log.d("Login: ","Login: "+ login);
 		
-		this.bt_logout.setOnClickListener(login_cadastro);
-		this.bt_criar_evento.setOnClickListener(login_cadastro);
+		this.bt_criar_evento.setOnClickListener(handler);
+		this.bt_consultarEvento.setOnClickListener(handler);
+		this.bt_consultar_Usuario.setOnClickListener(handler);
 		
 	}
 		
 	
-	public OnClickListener login_cadastro = new OnClickListener() {
+	public OnClickListener handler = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_logout)
-				startActivity(mainActI);
-			if(v == bt_criar_evento)
+			if(v == bt_criar_evento){
 				startActivity(cadastrarEvento);
+			}
+			if(v == bt_consultarEvento){
+				startActivity(consultarEventoInt);
+			}
+			if(v == bt_consultar_Usuario){
+				startActivity(consultarUsuarioInt);
+			}
 		}
 	}; 
 	
