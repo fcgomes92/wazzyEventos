@@ -43,8 +43,10 @@ public class MainActivity extends ActionBarActivity {
 		
 		public void onClick(View v) {
 			if(v == bt_login){
-				if(et_login.getText().toString().equals("admin") && et_senha.getText().toString().equals("admin123"))
+				if(et_login.getText().toString().equals("admin") && et_senha.getText().toString().equals("admin123")){
+					mainclassI.putExtra("login", et_login.getText().toString());
 					startActivity(mainclassI);
+				}
 				else
 					System.out.println("Erro de login!");
 		}

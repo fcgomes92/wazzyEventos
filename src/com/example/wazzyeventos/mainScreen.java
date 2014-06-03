@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,7 @@ public class mainScreen extends ActionBarActivity {
 	public Button bt_criar_evento, bt_logout;
 	public Intent mainActI;
 	public Intent cadastrarEvento;
+	public String login;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,14 @@ public class mainScreen extends ActionBarActivity {
 		//Sets das instancias do XML
 		this.bt_logout = (Button) this.findViewById(R.id.bt_logout);
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
+		
+		//Atividades
 		this.mainActI = new Intent(this, MainActivity.class);
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
+		
+		//Login do usuario logado
+		this.login = getIntent().getExtras().getString("login");
+		Log.d("Login: ","Login: "+ login);
 		
 		this.bt_logout.setOnClickListener(login_cadastro);
 		this.bt_criar_evento.setOnClickListener(login_cadastro);
