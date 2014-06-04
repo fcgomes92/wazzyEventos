@@ -3,6 +3,7 @@ package com.example.wazzyeventos;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,9 @@ import android.widget.Button;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento, bt_consultarEvento, bt_consultar_Usuario;
+	public Button bt_criar_evento, bt_consultarEvento, bt_consultar_Usuario, bt_acessarSiteProj;
 	public Intent mainActI, cadastrarEvento, consultarEventoInt, consultarUsuarioInt;
-	public String login;
+	public String login, url_siteProj;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,39 +29,54 @@ public class mainScreen extends ActionBarActivity {
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
 		this.bt_consultarEvento = (Button) this.findViewById(R.id.bt_consultar_evento_ms);
 		this.bt_consultar_Usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
+		this.bt_acessarSiteProj = (Button) this.findViewById(R.id.bt_acesso_site);
+		
+		//URL site do projeto
+		this.url_siteProj = "http://wazzyevenos.blogspot.com.br/2014/06/wazzy-eventos.html";
 		
 		//Atividades
 		this.mainActI = new Intent(this, MainActivity.class);
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
 		this.consultarEventoInt = new Intent(this, telaConsultaEvento.class);
 		this.consultarUsuarioInt = new Intent(this, telaConsultaUsuario.class);
+		//Cria a atividade que chamará o site do projeto
 		
 		//Login do usuario logado
 		this.login = getIntent().getExtras().getString("login");
 		Log.d("Login: ","Login: "+ login);
 		
-		this.bt_criar_evento.setOnClickListener(handler);
-		this.bt_consultarEvento.setOnClickListener(handler);
-		this.bt_consultar_Usuario.setOnClickListener(handler);
-		
-	}
-		
-	
-	public OnClickListener handler = new OnClickListener() {
-		
-		public void onClick(View v) {
-			if(v == bt_criar_evento){
+		this.bt_criar_evento.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				startActivity(cadastrarEvento);
 			}
-			if(v == bt_consultarEvento){
+		});
+		this.bt_consultarEvento.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				startActivity(consultarEventoInt);
 			}
-			if(v == bt_consultar_Usuario){
+		});
+		this.bt_consultar_Usuario.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				startActivity(consultarUsuarioInt);
 			}
-		}
-	}; 
-	
+		});
+		this.bt_acessarSiteProj.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent siteProjI = new Intent(Intent.ACTION_VIEW, Uri.parse(url_siteProj));
+				startActivity(siteProjI);
+			}
+		});	
+		
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 

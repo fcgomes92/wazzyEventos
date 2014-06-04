@@ -66,6 +66,12 @@
                 android:text="Meu perfil" />
 
             <Button
+                android:id="@+id/bt_acesso_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acessar Site Projeto" />
+
+            <Button
                 android:id="@+id/bt_del_conta_ms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
