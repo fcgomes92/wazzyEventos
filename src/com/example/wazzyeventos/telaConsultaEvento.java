@@ -19,6 +19,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 	public Button bt_editar, bt_deletar;
 	public TextView nome_evento, local_evento, desc_evento, dono_evento;
 	public RadioButton e1, e2, e3, e4, e5;
+	public String evento_score;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.e4 = (RadioButton) this.findViewById(R.id.rb_4estrela_consultaEvento);
 		this.e5 = (RadioButton) this.findViewById(R.id.rb_5estrela_consultaEvento);
 		
-		//Colocar qual a tela anterior
+		this.evento_score = "0";
 		
 		this.bt_editar.setOnClickListener(handler);
 		this.bt_deletar.setOnClickListener(handler);
@@ -70,55 +71,40 @@ public class telaConsultaEvento extends ActionBarActivity {
 		
 		@Override
 		public void onClick(View v) {
+			e1.setChecked(false);
+			e2.setChecked(false);
+			e3.setChecked(false);
+			e4.setChecked(false);
+			e5.setChecked(false);
 			if (v == e1){
-				e1.setChecked(false);
-				e2.setChecked(false);
-				e3.setChecked(false);
-				e4.setChecked(false);
-				e5.setChecked(false);
 				e1.setChecked(true);
+				evento_score = "1";
 			}
 			if (v == e2){
-				e1.setChecked(false);
-				e2.setChecked(false);
-				e3.setChecked(false);
-				e4.setChecked(false);
-				e5.setChecked(false);
 				e1.setChecked(true);
 				e2.setChecked(true);
+				evento_score = "2";
 			}
 			if (v == e3){
-				e1.setChecked(false);
-				e2.setChecked(false);
-				e3.setChecked(false);
-				e4.setChecked(false);
-				e5.setChecked(false);
 				e1.setChecked(true);
 				e2.setChecked(true);
 				e3.setChecked(true);
+				evento_score = "3";
 			}
 			if (v == e4){
-				e1.setChecked(false);
-				e2.setChecked(false);
-				e3.setChecked(false);
-				e4.setChecked(false);
-				e5.setChecked(false);
 				e1.setChecked(true);
 				e2.setChecked(true);
 				e3.setChecked(true);
 				e4.setChecked(true);
+				evento_score = "4";
 			}
 			if (v == e5){
-				e1.setChecked(false);
-				e2.setChecked(false);
-				e3.setChecked(false);
-				e4.setChecked(false);
-				e5.setChecked(false);
 				e1.setChecked(true);
 				e2.setChecked(true);
 				e3.setChecked(true);
 				e4.setChecked(true);
 				e5.setChecked(true);
+				evento_score = "5";
 			}
 		}
 	};
