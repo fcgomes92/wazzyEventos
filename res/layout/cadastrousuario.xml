@@ -70,7 +70,7 @@
 
     <Button
         android:id="@+id/bt_cadastrar_cadastro"
-        android:layout_width="277dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar" />
 

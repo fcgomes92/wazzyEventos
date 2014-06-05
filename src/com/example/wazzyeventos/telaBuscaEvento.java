@@ -1,42 +1,62 @@
 package com.example.wazzyeventos;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
+import java.util.List;
+
+import com.example.wazzyeventos.model.Evento;
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class telaDeCadastro extends ActionBarActivity {
+
+
+
+public class telaBuscaEvento extends ActionBarActivity{
+	private Button bt_pesquisar;
+	private EditText et_nome,et_local;
+	public Intent main;
 	
-	public Button bt_cadastrar;
-	public EditText field_login, field_senha, field_nome;
-	public Intent mainActI;
+	private String nome;
+	private String local;
+	
+	public MySQLiteHelper db;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.cadastrousuario);
+		setContentView(R.layout.pesquisaevento);
+		 db = new MySQLiteHelper(this);
+		//INSTANCIANCIAS DO XML
+		bt_pesquisar = (Button) this.findViewById(R.id.bt_pesquisar_pesquisarevento);
 		
-		//Sets das instancias do XML
-		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar_cadastro);
-		this.mainActI = new Intent(this, MainActivity.class);
+		et_nome = (EditText) this.findViewById(R.id.field_nome_pesquisarevento);
+		et_local = (EditText) this.findViewById(R.id.field_local_pesquisarevento);
 		
-		this.bt_cadastrar.setOnClickListener(new OnClickListener() {
+		main = new Intent(this,mainScreen.class);
+		
+		bt_pesquisar.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				finish();
+				nome = et_nome.getText().toString();
+				local = et_local.getText().toString();
+				List<Evento> lista =  db.getSelectedEvento(nome, local);
 			}
 		});
-		
 	}
+		
+		
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

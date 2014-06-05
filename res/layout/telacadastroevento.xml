@@ -50,11 +50,14 @@
         android:ems="10"
         android:maxLines="1"/>
 
+    
 
     <Button
         android:id="@+id/bt_cadastrar_evento"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="Cadastrar Evento" />
+
+
     
 </LinearLayout>
