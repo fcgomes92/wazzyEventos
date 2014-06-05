@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,10 +47,10 @@ public class telaCadastroEvento extends ActionBarActivity {
 		this.mainScreen = new Intent(this, mainScreen.class);
 		
 		
-		bt_cadastrar.setOnClickListener(new View.OnClickListener() {
+		bt_cadastrar.setOnClickListener(new View.OnClickListener(){
 			
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View arg0){
 				
 				//ADICIONA UM EVENTO NO BANCO DE DADOS!!!
 				
@@ -60,11 +61,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 			
 				if(nome.length()>0&&local.length()>0&&descricao.length()>0){
 					db.addEvento(new Evento(nome,local,descricao));
-					AlertDialog.Builder alerta = new AlertDialog.Builder(telaCadastroEvento.this);
-					alerta.setTitle("SUCESSO!");
-					alerta.setMessage("Evento Cadastrado com Sucesso.");
-					alerta.setNeutralButton("OK", null);
-					alerta.show();
+					Log.d("Sucesso Criação Evento", "Evento criado com sucesso!");
 					finish();
 				}
 				
