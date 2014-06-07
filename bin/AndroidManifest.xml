@@ -26,6 +26,9 @@
         <activity android:name="com.example.wazzyeventos.telaDeCadastro"/>
         <activity android:name="com.example.wazzyeventos.telaCadastroEvento"/>
         <activity android:name="com.example.wazzyeventos.telaBuscaEvento"/>
+        <activity android:name="com.example.wazzyeventos.telaBuscaUsuario"/>
+        <activity android:name="com.example.wazzyeventos.telaRemoverUsuario"/>
+        <activity android:name="com.example.wazzyeventos.telaAlterarUsuario"/>
     </application>
 
 </manifest>

@@ -30,8 +30,8 @@ public class telaCadastroEvento extends ActionBarActivity {
 	//variaveis auxiliares
 	public String nome;
 	public String local;
+	public String login;
 	public String descricao;
-	public Intent mainScreen;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +44,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 		this.et_local = (EditText) this.findViewById(R.id.field_local_evento_ce);
 		this.et_desc = (EditText) this.findViewById(R.id.field_desc_evento_ce);
 		
-		this.mainScreen = new Intent(this, mainScreen.class);
-		
+		this.login = getIntent().getExtras().getString("login");
 		
 		bt_cadastrar.setOnClickListener(new View.OnClickListener(){
 			
@@ -61,7 +60,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 			
 				if(nome.length()>0&&local.length()>0&&descricao.length()>0){
 					db.addEvento(new Evento(nome,local,descricao));
-					Log.d("Sucesso Criação Evento", "Evento criado com sucesso!");
+					Log.d("Sucesso Criação Evento", "Evento criado com sucesso, pelo usuário: "+ login +"!");
 					finish();
 				}
 				

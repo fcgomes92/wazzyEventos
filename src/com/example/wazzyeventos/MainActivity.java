@@ -1,5 +1,7 @@
 package com.example.wazzyeventos;
 
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
+
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
@@ -20,7 +22,10 @@ public class MainActivity extends ActionBarActivity {
 	public Button bt_login, bt_cadastrar, bt_logout;
 	public EditText et_login, et_senha;
 	public Intent mainclassI, cadastroUserI;
-	public AlertDialog alertDialog;
+	public static String login,senha,nome,endereco,telefone,data;
+	//public telaRemoverUsuario remove;
+	public MySQLiteHelper db = new MySQLiteHelper(this);
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +49,20 @@ public class MainActivity extends ActionBarActivity {
 		
 		public void onClick(View v) {
 			if(v == bt_login){
-				if(et_login.getText().toString().equals("admin") && et_senha.getText().toString().equals("admin123")){
-					mainclassI.putExtra("login", et_login.getText().toString());
+				mainclassI.putExtra("login", et_login.getText().toString());
+				login = et_login.getText().toString();
+				senha = et_senha.getText().toString();
+				int status = db.verificaCliente(login, senha);
+				if(status==1){
 					startActivity(mainclassI);
+				}else{
+					Log.d("errou de senha/login","errou feio, errou rude");
+					AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
+					alert.setMessage("Login ou senha invalidos!");
+					alert.setTitle("Aviso");
+					alert.setNeutralButton("OK", null);
+					alert.show();
 				}
-				else
-					Log.d("Erro","Erro de login!");
 		}
 			if(v == bt_cadastrar)
 				startActivity(cadastroUserI);

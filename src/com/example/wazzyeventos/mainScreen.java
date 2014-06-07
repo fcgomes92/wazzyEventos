@@ -17,9 +17,10 @@ import android.widget.Button;
 public class mainScreen extends ActionBarActivity {
 	
 	public Button bt_criar_evento,bt_consulta_evento, bt_acessar_site;
-	public Intent mainActI;
+	public Button bt_consulta_usuario, bt_deletar_Usuario, bt_alterar_usuario;
 	public Intent cadastrarEvento;
-	public Intent consultarEvento;
+	public Intent buscarEvento;
+	public Intent pesquisaS,removeS,alterarS;
 	public String login, url_siteProj;
 	
 	@Override
@@ -28,14 +29,24 @@ public class mainScreen extends ActionBarActivity {
 		setContentView(R.layout.mainscreen);
 		
 		//Sets das instancias do XML
-	
+		
+		pesquisaS = new Intent (this, telaBuscaUsuario.class);
+		
+		//Cliente
+		this.bt_consulta_usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
+		this.bt_deletar_Usuario = (Button) this.findViewById(R.id.bt_del_conta_ms);
+		this.bt_alterar_usuario = (Button) this.findViewById(R.id.bt_meu_perfil_ms);
+		this.removeS = new Intent(this, telaRemoverUsuario.class);
+		this.alterarS = new Intent(this, telaAlterarUsuario.class);
+		
+		//Evento
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
 		this.bt_consulta_evento = (Button) this.findViewById(R.id.bt_consultar_evento_ms);
-		this.bt_acessar_site = (Button) this.findViewById(R.id.bt_acesso_site);
-		
-		this.mainActI = new Intent(this, MainActivity.class);
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
-		this.consultarEvento = new Intent(this, telaBuscaEvento.class);
+		this.buscarEvento = new Intent(this, telaBuscaEvento.class);
+		
+		//Site
+		this.bt_acessar_site = (Button) this.findViewById(R.id.bt_acesso_site);
 		
 		//URL site do projeto
 		this.url_siteProj = "http://wazzyevenos.blogspot.com.br/2014/06/wazzy-eventos.html";
@@ -53,16 +64,47 @@ public class mainScreen extends ActionBarActivity {
 				startActivity(siteProjI);		
 			}
 		});
-	}
 		
+		this.bt_criar_evento.setOnClickListener(login_cadastro);
+		
+			bt_alterar_usuario.setOnClickListener(new View.OnClickListener() {
+			
+				@Override
+				public void onClick(View v) {
+					startActivity(alterarS);
+				
+				}
+			});
+		
+		this.bt_deletar_Usuario.setOnClickListener(new View.OnClickListener() {
+			
+				@Override
+				public void onClick(View v) {
+					startActivity(removeS);
+				
+				}
+			});
+		
+		this.bt_consulta_usuario.setOnClickListener(new View.OnClickListener() {
+			
+				@Override
+				public void onClick(View v) {
+					startActivity(pesquisaS);
+					
+				}
+			});
+	}
 	
 	public OnClickListener login_cadastro = new OnClickListener() {
 		
 		public void onClick(View v) {
-			if(v == bt_criar_evento)
+			if(v == bt_criar_evento){
+				cadastrarEvento.putExtra("login", login);
 				startActivity(cadastrarEvento);
-			if(v == bt_consulta_evento)
-				startActivity(consultarEvento);
+			}
+			if(v == bt_consulta_evento){
+				startActivity(buscarEvento);
+			}
 		}
 	}; 
 	

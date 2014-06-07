@@ -1,0 +1,54 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/text_remover_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="55dp"
+        android:text="Email:" />
+
+    <TextView
+        android:id="@+id/text_emailcliente_remover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/text_remover_email"
+        android:layout_marginLeft="15dp"
+        android:layout_toRightOf="@+id/text_remover_email" />
+
+    <Button
+        android:id="@+id/bt_remover_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_remover_email"
+        android:layout_below="@+id/text_remover_email"
+        android:layout_marginTop="72dp"
+        android:text="Encerrar Conta" />
+
+    <TextView
+        android:id="@+id/text_senha_remover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/text_remover_email"
+        android:layout_below="@+id/text_remover_email"
+        android:layout_marginTop="22dp"
+        android:text="Senha:" />
+
+    <EditText
+        android:id="@+id/field_senha_remover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/text_senha_remover"
+        android:layout_alignBottom="@+id/text_senha_remover"
+        android:layout_alignLeft="@+id/text_emailcliente_remover"
+        android:ems="10"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
+
+</RelativeLayout>

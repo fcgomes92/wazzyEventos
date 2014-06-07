@@ -9,28 +9,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
-
+    
+    
     <TextView
-        android:id="@+id/text_nome_cadastro"
+        android:id="@+id/text_nome_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nome" />
 
     <EditText
-        android:id="@+id/field_nome_cadastro"
+        android:id="@+id/field_nome_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:ems="10" />
 
     <TextView
-        android:id="@+id/text_senha_cadastro"
+        android:id="@+id/text_endereco_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Senha" />
+        android:text="Endereco" />
 
     <EditText
-        android:id="@+id/field_senha_cadastro"
+        android:id="@+id/field_endereco_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
@@ -39,71 +40,37 @@
         android:password="true" />
 
     <TextView
-        android:id="@+id/text_email_cadastro"
+        android:id="@+id/text_email_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email" />
 
     <EditText
-        android:id="@+id/field_email_cadastro"
+        android:id="@+id/field_email_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|top"
         android:ems="10"
         android:maxLines="1">
 
-        <requestFocus />
+        
     </EditText>
-
-    <TextView
-        android:id="@+id/text_endereco_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Endereço" />
-
-    <EditText
-        android:id="@+id/field_endereco_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/text_telefone_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Telefone" />
-
-    <EditText
-        android:id="@+id/field_telefone_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/text_datanascimento_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data Nascimento" />
-
-    <EditText
-        android:id="@+id/field_datanascimento_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/bt_cadastrar_cadastro"
+            android:id="@+id/bt_pesquisar_pesquisa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cadastrar" />
+            android:text="Pesquisar" />
+        </LinearLayout>
 
-    </LinearLayout>
+    <ListView
+        android:id="@+id/lista_usuarios"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
