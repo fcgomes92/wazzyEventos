@@ -34,6 +34,13 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.desc_evento = (TextView) this.findViewById(R.id.text_desc_evento_consultaEvento);
 		this.dono_evento = (TextView) this.findViewById(R.id.text_nome_dono_consultaEvento);
 		
+		//setando valores dos campos
+		this.nome_evento.setText("Nome do Evento: "+getIntent().getExtras().getString("Evento_nome"));  
+		this.local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("Evento_local"));  
+		this.desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("Evento_descricao"));  
+		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("Evento_dono"));  
+		
+		
 		//RadioBtsde avaliacao
 		this.e1 = (RadioButton) this.findViewById(R.id.rb_1estrela_consultaEvento);
 		this.e2 = (RadioButton) this.findViewById(R.id.rb_2estrela_consultaEvento);

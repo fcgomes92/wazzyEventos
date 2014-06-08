@@ -81,6 +81,7 @@ public class mainScreen extends ActionBarActivity {
 				@Override
 				public void onClick(View v) {
 					startActivity(removeS);
+					finish();
 				
 				}
 			});

@@ -10,6 +10,7 @@ public class Evento {
 	String nome;
 	String local;
 	String descricao;
+	String login;
 	int id;
  
     public Evento(){
@@ -19,8 +20,14 @@ public class Evento {
     	this.setNome(nome);
 		this.setLocal(local);
 		this.setDescricao(descricao);
-	
-	
+    }
+    //objeto temporario pra funcao de pegar eventos e jogar em uma lista
+    public Evento(String nome, String local, String descricao,String login) {
+        super();
+    	this.setNome(nome);
+		this.setLocal(local);
+		this.setDescricao(descricao);
+		this.setLogin(login);
     }
  
     //getters & setters
@@ -38,7 +45,9 @@ public class Evento {
 	public void setDescricao(String descricao){
 		this.descricao = descricao;
 	}
-	
+	public void setLogin(String login){
+		this.login = login;
+	}
 
 	
 	//Getters
@@ -55,12 +64,16 @@ public class Evento {
 	public String getDescricao(){
 		return this.descricao;
 	}
+	public String getLogin(){
+		return this.login;
+	}
 	
 
     
     @Override
     public String toString() {
         return "Evento [id=" + this.id + ", nome=" + this.getNome() + ", local=" + this.getLocal()
-                + ", descricao="+ this.getDescricao() + "]";
+                + ", descricao="+ this.getDescricao() + ", login = "+login+"]";
     }
+
 }

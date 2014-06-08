@@ -51,7 +51,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 "local TEXT,"
                 + "descricao TEXT,"
                 + "login TEXT,"
-                + " foreignkey (login) references clientes (email)"
+                + " foreign key (login) references clientes (email)"
                 +")";
         // create books table
         db.execSQL(CREATE_EVENTO_TABLE);
@@ -82,7 +82,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_NOME = "nome";
     private static final String KEY_LOCAL = "local";
     private static final String KEY_DESCRICAO = "descricao";
-    
+    private static final String KEY_LOGIN = "login";    
     // Books table name
     private static final String TABLE_CLIENTE = "clientes";
  
@@ -93,12 +93,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_ENDERECO = "endereco";
     private static final String KEY_TELEFONE = "telefone";
     private static final String KEY_DATA = "datanasc";
+
     
     //Colunas das tabelas
     private static final String[] COLUMNS_CLIENTE = {KEY_EMAIL,KEY_SENHA,KEY_NOME,KEY_ENDERECO,KEY_TELEFONE,KEY_DATA};
-    private static final String[] COLUMNS_EVENTO = {KEY_ID,KEY_NOME,KEY_LOCAL,KEY_DESCRICAO};
+    private static final String[] COLUMNS_EVENTO = {KEY_ID,KEY_NOME,KEY_LOCAL,KEY_DESCRICAO,KEY_LOGIN};
  
-    public void addEvento(Evento ev){
+    public void addEvento(Evento ev,String login){
         Log.d("addEvento", ev.toString());
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -108,6 +109,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_NOME, ev.getNome()); // get title 
         values.put(KEY_LOCAL, ev.getLocal()); // get author
         values.put(KEY_DESCRICAO, ev.getDescricao());
+        values.put(KEY_LOGIN,login);
         
         
       
@@ -146,6 +148,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ev.setNome(cursor.getString(1));
         ev.setLocal(cursor.getString(2));
         ev.setDescricao(cursor.getString(3));
+        ev.setLogin(cursor.getString(4));
         
       
  
@@ -159,18 +162,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     	 List<Evento> lista = new LinkedList<Evento>();
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
- 
-        // 2. build query
-        Cursor cursor = 
-                db.query(TABLE_EVENTO, // a. table
-                COLUMNS_EVENTO, // b. column names
-                " nome = ?", // c. selections 
-                new String[] {nome}, // d. selections args
-                null, // e. group by
-                null, // f. having
-                null, // g. order by
-                null); // h. limit
- 
+        String query = "";
+        // VERIFICACOES PARA SABER QUAL CAMPO FOI PREENCHIDO OU NAO
+       if(nome.isEmpty()&&!local.isEmpty())
+    	   query = "SELECT * FROM " + TABLE_EVENTO + " WHERE local = '"+local+"'";
+       else 
+    	   
+    	   if (!nome.isEmpty()&&local.isEmpty())
+    		  query = "SELECT * FROM "+TABLE_EVENTO+" WHERE nome = '"+nome+"'";
+    	   else 
+    		   
+    		   query = "SELECT * FROM "+TABLE_EVENTO+" WHERE nome = '"+nome+"' AND local = '"+local+"'";
+    	
+       // FAZ CONSULTA
+       
+    		  Cursor cursor = db.rawQuery(query, null);
+       //MONTA OS OBJETOS E ADICIONA NA LISTA  		
         Evento ev = null;
         if (cursor.moveToFirst()) {
             do {
@@ -179,13 +186,13 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 ev.setNome(cursor.getString(1));
                 ev.setLocal(cursor.getString(2));
                 ev.setDescricao(cursor.getString(3));
+                ev.setLogin(cursor.getString(4));
                
-               
-                // Add book to books
+                //adiciona na lista
                 lista.add(ev);
             } while (cursor.moveToNext());
         }
-      
+       
  
         Log.d("getBook()", lista.toString());
  
@@ -215,6 +222,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 ev.setNome(cursor.getString(1));
                 ev.setLocal(cursor.getString(2));
                 ev.setDescricao(cursor.getString(3));
+                ev.setLogin(cursor.getString(4));
                
                
                 // Add book to books
