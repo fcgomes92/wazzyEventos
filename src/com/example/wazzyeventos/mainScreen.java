@@ -74,6 +74,7 @@ public class mainScreen extends ActionBarActivity {
 			
 				@Override
 				public void onClick(View v) {
+					alterarS.putExtra("login_cliente", login);
 					startActivity(alterarS);
 				
 				}

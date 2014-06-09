@@ -1,9 +1,9 @@
 package com.example.wazzyeventos;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,12 +12,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class telaConsultaUsuario extends ActionBarActivity {
 	
 	public TextView nome_user, email_user, end_user, tel_user, dataNasc_user;
-	public String user_score;
+	public int user_score;
+	public Button bt_avaliar;
+	public RatingBar rtbar_user;
+	private Context ctx;
 	public RadioButton e1, e2, e3, e4, e5;
 	
 	@Override
@@ -32,6 +37,16 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		this.tel_user = (TextView) this.findViewById(R.id.text_telUser_consultaUser);
 		this.dataNasc_user = (TextView) this.findViewById(R.id.text_dataNasc_consultaUser);
 		
+		// Barra de estrelas
+		this.rtbar_user = (RatingBar) this.findViewById(R.id.rtbar_geral_user);
+		
+		//Setting dados do usuario escolhido
+		this.nome_user.setText("Nome: " + getIntent().getExtras().getString("usuario_escolhido_nome"));
+		this.email_user.setText("Email: " + getIntent().getExtras().getString("usuario_escolhido_email"));
+		this.end_user.setText("Endereço: " + getIntent().getExtras().getString("usuario_escolhido_end"));
+		this.tel_user.setText("Telefone: " + getIntent().getExtras().getString("usuario_escolhido_tel"));
+		this.dataNasc_user.setText("Data Nascimento: " + getIntent().getExtras().getString("usuario_dtnsc"));
+		
 		//RadioBtsde avaliacao
 		this.e1 = (RadioButton) this.findViewById(R.id.rb_1estrela_consultaEvento);
 		this.e2 = (RadioButton) this.findViewById(R.id.rb_2estrela_consultaEvento);
@@ -39,7 +54,12 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		this.e4 = (RadioButton) this.findViewById(R.id.rb_4estrela_consultaEvento);
 		this.e5 = (RadioButton) this.findViewById(R.id.rb_5estrela_consultaEvento);
 		
-		this.user_score = "0";
+		this.bt_avaliar = (Button) this.findViewById(R.id.bt_avaliar_user);
+		this.bt_avaliar.setOnClickListener(handler);
+		
+		this.ctx = this;
+		
+		this.user_score = 0;
 		
 		this.e1.setOnClickListener(rb_handler);
 		this.e2.setOnClickListener(rb_handler);
@@ -53,6 +73,12 @@ public class telaConsultaUsuario extends ActionBarActivity {
 	public OnClickListener handler = new OnClickListener() {
 		
 		public void onClick(View v) {
+			if (v == bt_avaliar){
+				if(user_score != 0){
+					rtbar_user.setRating(user_score);
+				}
+				else Toast.makeText(ctx, "Avalie utilizando a barra acima!" , Toast.LENGTH_SHORT).show();	
+			}
 		}
 	}; 
 	
@@ -67,25 +93,25 @@ public class telaConsultaUsuario extends ActionBarActivity {
 			e5.setChecked(false);
 			if (v == e1){
 				e1.setChecked(true);
-				user_score = "1";
+				user_score = 1;
 			}
 			if (v == e2){
 				e1.setChecked(true);
 				e2.setChecked(true);
-				user_score = "2";
+				user_score = 2;
 			}
 			if (v == e3){
 				e1.setChecked(true);
 				e2.setChecked(true);
 				e3.setChecked(true);
-				user_score = "3";
+				user_score = 3;
 			}
 			if (v == e4){
 				e1.setChecked(true);
 				e2.setChecked(true);
 				e3.setChecked(true);
 				e4.setChecked(true);
-				user_score = "4";
+				user_score = 4;
 			}
 			if (v == e5){
 				e1.setChecked(true);
@@ -93,7 +119,7 @@ public class telaConsultaUsuario extends ActionBarActivity {
 				e3.setChecked(true);
 				e4.setChecked(true);
 				e5.setChecked(true);
-				user_score = "5";
+				user_score = 5;
 			}
 		}
 	};

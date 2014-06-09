@@ -1,49 +1,45 @@
 package com.example.wazzyeventos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
-import com.example.wazzyeventos.model.Cliente;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.wazzyeventos.model.Cliente;
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaBuscaUsuario extends ActionBarActivity {
 	
 	private Button bt_pesquisar;
 	private EditText nome, endereco, email;
-	public Intent menu;
+	public Intent usuario_escolhido;
 	public ListView lista;
 	private MySQLiteHelper db = new MySQLiteHelper(this);
-	private Context context;
-
-	
-
+	private Context ctx;
+	private List<Cliente> clientes = new LinkedList<Cliente>();
+	private List<String> nomes_clientes = new LinkedList<String>();
+	private ArrayAdapter<String> adapter; 
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pesquisausuario);
-		
-		menu = new Intent(this,mainScreen.class);
 	
 		bt_pesquisar = (Button) findViewById(R.id.bt_pesquisar_pesquisa);
 		
@@ -51,26 +47,47 @@ public class telaBuscaUsuario extends ActionBarActivity {
 		endereco = (EditText) findViewById(R.id.field_endereco_pesquisar);
 		email = (EditText) findViewById(R.id.field_email_pesquisar);
 		
+		ctx = this;
+		
+		usuario_escolhido = new Intent(ctx, telaConsultaUsuario.class);
+		
 		lista = (ListView) findViewById(R.id.lista_usuarios);
-        
+		lista.setOnItemClickListener(new OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int pos, long id) {
+				// Add dados do usuario escolhido no extras
+				usuario_escolhido.putExtra("usuario_escolhido_nome", clientes.get(pos).getNome());
+				usuario_escolhido.putExtra("usuario_escolhido_email", clientes.get(pos).getEmail());
+				usuario_escolhido.putExtra("usuario_escolhido_end", clientes.get(pos).getEndereco());
+				usuario_escolhido.putExtra("usuario_escolhido_tel", clientes.get(pos).getTelefone());
+				usuario_escolhido.putExtra("usuario_escolhido_dtnsc", clientes.get(pos).getData());
+				startActivity(usuario_escolhido);
+			}
+		});
        
 		
 		bt_pesquisar.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				clientes.clear();
+				nomes_clientes.clear();
 				String pnome, pendereco, pemail;
 					pnome = nome.getText().toString();
 					pendereco = endereco.getText().toString();
 					pemail = email.getText().toString();
-					
-					
+				clientes = db.getAllClientes(pnome, pendereco, pemail);
+				for(int i = 0 ; i < clientes.size() ; i++){
+					nomes_clientes.add(clientes.get(i).getNome());
+					Log.d("Nome: ", nomes_clientes.get(i));
+					adapter = new ArrayAdapter(ctx,
+					        android.R.layout.simple_list_item_1, nomes_clientes);
+					lista.setAdapter(adapter);
+				}
 			}
-		});
-		
-		
-		
-		
+		});	
 	} 
 	
 	

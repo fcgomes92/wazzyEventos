@@ -3,11 +3,10 @@ package com.example.wazzyeventos.sqlite;
  
 import java.util.LinkedList;
 import java.util.List;
-
 import com.example.wazzyeventos.MainActivity;
 import com.example.wazzyeventos.model.Cliente;
 import com.example.wazzyeventos.model.Evento;
-
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -158,7 +157,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return ev;
     }
  
-    public List<Evento> getSelectedEvento(String nome,String local){
+    @SuppressLint("NewApi")
+	public List<Evento> getSelectedEvento(String nome,String local){
     	 List<Evento> lista = new LinkedList<Evento>();
         // 1. get reference to readable DB
         SQLiteDatabase db = this.getReadableDatabase();
@@ -311,6 +311,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Log.d("deleteEvento", ev.toString());
  
     }
+    
     
     // inicio do código para tratamento de cliente
     // tratar eles muito bem
@@ -479,7 +480,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
  
-        Log.d("getAllClientes", clientes.toString());
+        //Log.d("getAllClientes", clientes.toString());
  
         // return books
         return clientes;

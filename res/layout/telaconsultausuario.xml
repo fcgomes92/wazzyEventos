@@ -91,9 +91,32 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/bt_avaliar_user"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:text="Avaliar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RatingBar
+            android:id="@+id/rtbar_geral_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:clickable="false"
+            android:longClickable="false" />
+
+        <TextView
+            android:id="@+id/txt_avalicao_geral_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/rtbar_geral_user"
+            android:layout_centerHorizontal="true"
+            android:text="Avaliação Geral" />
+    </RelativeLayout>
 
 </LinearLayout>

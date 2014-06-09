@@ -33,6 +33,7 @@
     	<activity android:name="com.example.wazzyeventos.telaListaEvento"/>
     	<activity android:name="com.example.wazzyeventos.telaConsultameuseventos"/>
     	<activity android:name="com.example.wazzyeventos.telaEditameuseventos"/>
+        <activity android:name="com.example.wazzyeventos.telaConsultaUsuario"/>
     </application>
 
 </manifest>

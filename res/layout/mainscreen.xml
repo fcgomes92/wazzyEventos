@@ -63,7 +63,7 @@
                 android:id="@+id/bt_meu_perfil_ms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meu perfil" />
+                android:text="Alterar Perfil" />
 
             <Button
                 android:id="@+id/bt_acesso_site"

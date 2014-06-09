@@ -2,7 +2,7 @@ package com.example.wazzyeventos;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,7 +22,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.example.wazzyeventos.model.Evento;
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
@@ -63,6 +62,7 @@ public class telaBuscaEvento extends ActionBarActivity {
 		
 		bt_pesquisar.setOnClickListener(new View.OnClickListener() {
 
+			@SuppressLint("NewApi")
 			@Override
 			public void onClick(View v) {
 				nome = et_nome.getText().toString();

@@ -10,131 +10,179 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
 
-    <LinearLayout
-        android:id="@+id/Nome"
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <TextView
-            android:id="@+id/text1_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome:" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/text_nome_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="NomeAtual" />
+            <LinearLayout
+                android:id="@+id/Nome"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/text1_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nome:" />
 
-    <LinearLayout
-        android:id="@+id/Telefone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/text_nome_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NomeAtual"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/text2_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Telefone:" />
+            <LinearLayout
+                android:id="@+id/Telefone"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
 
-        <EditText
-            android:id="@+id/field_telefone_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10" >
+                <TextView
+                    android:id="@+id/text2_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Telefone:" />
 
-            <requestFocus />
-        </EditText>
+                <EditText
+                    android:id="@+id/field_telefone_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10" >
 
-    </LinearLayout>
+                    <requestFocus />
+                </EditText>
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/Endereço"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+            <LinearLayout
+                android:id="@+id/Endereço"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
 
-        <TextView
-            android:id="@+id/text3_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Endereço:" />
+                <TextView
+                    android:id="@+id/text3_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Endereço:" />
 
-        <EditText
-            android:id="@+id/field_endereco_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10" />
+                <EditText
+                    android:id="@+id/field_endereco_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/Data"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
 
-    <LinearLayout
-        android:id="@+id/Data"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/text4_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data de Nascimento:" />
 
-        <TextView
-            android:id="@+id/text4_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Data de Nascimento:" />
+                <TextView
+                    android:id="@+id/text_data_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DataAtual"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/text_data_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="DataAtual" />
+            <LinearLayout
+                android:id="@+id/Email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/text5_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:" />
 
-    <LinearLayout
-        android:id="@+id/Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/field_email_alterar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="login"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/text5_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Email:" />
+            <LinearLayout
+                android:id="@+id/imagem_user"
+                android:layout_width="match_parent"
+                android:layout_height="75dp" >
 
-        <TextView
-            android:id="@+id/field_email_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="login" />
+                <ImageView
+                    android:id="@+id/img_user_altera_perfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:src="@drawable/ic_launcher" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="162dp"
+                android:layout_gravity="bottom" >
 
-    <LinearLayout
-        android:id="@+id/senha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+                <Button
+                    android:id="@+id/bt_alterar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:text="Alterar" />
 
-        <TextView
-            android:id="@+id/text6_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Senha:" />
+                <LinearLayout
+                    android:id="@+id/confirma_senha"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_above="@+id/bt_alterar"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/field_senha_alterar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:inputType="textPassword" />
+                    <TextView
+                        android:id="@+id/txt_confirmar_senha"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:text="Entre com sua senha para confirmar as alterações"
+                        android:textAppearance="?android:attr/absListViewStyle" />
 
-    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/senha"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" >
 
-    <Button
-        android:id="@+id/bt_alterar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alterar" />
+                        <TextView
+                            android:id="@+id/text6_alterar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Senha:" />
+
+                        <EditText
+                            android:id="@+id/field_senha_alterar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="textPassword" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
