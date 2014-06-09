@@ -10,10 +10,11 @@ public class Cliente {
     private String endereco;
     private String telefone;
     private String datanasc;
+    private int aval;
  
     public Cliente(){}
  
-    public Cliente(String email, String senha, String nome, String endereco, String telefone, String datanasc) {
+    public Cliente(String email, String senha, String nome, String endereco, String telefone, String datanasc, int aval2) {
         super();
         this.email = email;
         this.senha = senha;
@@ -21,6 +22,7 @@ public class Cliente {
         this.endereco = endereco;
         this.telefone = telefone;
         this.datanasc = datanasc;
+        this.aval = aval2;
     }
  
     //getters & setters
@@ -28,6 +30,14 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente [email=" + email + ", nome=" + nome + ", endereco=" + endereco + ", telefone=" + telefone +", Data Nascimento=" + datanasc+ "]";
+    }
+    
+    public int getAval(){
+    	return this.aval;
+    }
+    
+    public void setAval(int aval2){
+    	this.aval = aval2;
     }
 	
 	public void setEmail(String t){

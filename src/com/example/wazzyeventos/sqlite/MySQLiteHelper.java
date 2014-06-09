@@ -20,7 +20,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "WazzyDB2";
+    private static final String DATABASE_NAME = "WazzyDB7";
     
     private MainActivity as;
     
@@ -38,7 +38,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 "nome TEXT, "+
                 "endereco TEXT, "+
                 "telefone TEXT, "+
-                "datanasc TEXT )";
+                "datanasc TEXT, "
+                +"avaluser INTEGER"
+                + " )";
         // create books table
         db.execSQL(CREATE_CLIENTE_TABLE);
     	
@@ -47,11 +49,12 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         String CREATE_EVENTO_TABLE = "CREATE TABLE evento ( " +
         		"id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
                 "nome TEXT, "+
-                "local TEXT,"
-                + "descricao TEXT,"
-                + "login TEXT,"
-                + " foreign key (login) references clientes (email)"
-                +")";
+                "local TEXT, "
+                + "descricao TEXT, "
+                + "login TEXT, "
+                + "avalevento INTEGER, "
+                + "foreign key (login) references clientes (email) "
+                +" )";
         // create books table
         db.execSQL(CREATE_EVENTO_TABLE);
     }
@@ -81,7 +84,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_NOME = "nome";
     private static final String KEY_LOCAL = "local";
     private static final String KEY_DESCRICAO = "descricao";
-    private static final String KEY_LOGIN = "login";    
+    private static final String KEY_LOGIN = "login";
+    private static final String KEY_AVALEVENTO = "avalevento";
     // Books table name
     private static final String TABLE_CLIENTE = "clientes";
  
@@ -92,13 +96,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     private static final String KEY_ENDERECO = "endereco";
     private static final String KEY_TELEFONE = "telefone";
     private static final String KEY_DATA = "datanasc";
+    private static final String KEY_AVALCLIENTE = "avaluser";
 
     
     //Colunas das tabelas
-    private static final String[] COLUMNS_CLIENTE = {KEY_EMAIL,KEY_SENHA,KEY_NOME,KEY_ENDERECO,KEY_TELEFONE,KEY_DATA};
-    private static final String[] COLUMNS_EVENTO = {KEY_ID,KEY_NOME,KEY_LOCAL,KEY_DESCRICAO,KEY_LOGIN};
+    private static final String[] COLUMNS_CLIENTE = {KEY_EMAIL,KEY_SENHA,KEY_NOME,KEY_ENDERECO,KEY_TELEFONE,KEY_DATA, KEY_AVALCLIENTE};
+    private static final String[] COLUMNS_EVENTO = {KEY_ID,KEY_NOME,KEY_LOCAL,KEY_DESCRICAO,KEY_LOGIN,KEY_AVALEVENTO};
  
-    public void addEvento(Evento ev,String login){
+    public void addEvento(Evento ev,String login,int aval){
         Log.d("addEvento", ev.toString());
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -109,6 +114,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_LOCAL, ev.getLocal()); // get author
         values.put(KEY_DESCRICAO, ev.getDescricao());
         values.put(KEY_LOGIN,login);
+        values.put(KEY_AVALEVENTO, aval);
         
         
       
@@ -148,10 +154,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ev.setLocal(cursor.getString(2));
         ev.setDescricao(cursor.getString(3));
         ev.setLogin(cursor.getString(4));
+        ev.setAval(cursor.getInt(5));
         
       
  
-        Log.d("getBook("+id+")", ev.toString());
+        Log.d("getEvento("+id+")", ev.toString());
  
         // 5. return book
         return ev;
@@ -187,6 +194,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 ev.setLocal(cursor.getString(2));
                 ev.setDescricao(cursor.getString(3));
                 ev.setLogin(cursor.getString(4));
+                ev.setAval(cursor.getInt(5));
                
                 //adiciona na lista
                 lista.add(ev);
@@ -220,6 +228,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                   ev.setLocal(cursor.getString(2));
                   ev.setDescricao(cursor.getString(3));
                   ev.setLogin(cursor.getString(4));
+                  ev.setAval(cursor.getInt(5));
                  
                  
                   // Add book to books
@@ -256,6 +265,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 ev.setLocal(cursor.getString(2));
                 ev.setDescricao(cursor.getString(3));
                 ev.setLogin(cursor.getString(4));
+                ev.setAval(cursor.getInt(5));
                
                
                 // Add book to books
@@ -293,6 +303,31 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return i;
  
     }
+    
+    public int updateEventoAval(int id, int realScore) {
+		// 
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("email_2",""+id);
+        Log.d("aval_banco_2",""+realScore);
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("avalevento", realScore);
+        // 3. updating row
+        try{
+        int i = db.update(TABLE_CLIENTE, //table
+                values, // column/value
+                KEY_EMAIL+" = ?", // selections
+                new String[] { ""+id }); //selection args
+        }catch(SQLException e){
+        	Log.d("erro","deu ruim");
+        	return 0;
+        }
+        // 4. close
+        db.close();
+ 
+        return 1;	
+	} 
  
     // Deleting single book
     public void deleteEvento(Evento ev) {
@@ -330,6 +365,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_ENDERECO, cliente.getEndereco()); // get endereco
         values.put(KEY_TELEFONE, cliente.getTelefone()); // get telefone
         values.put(KEY_DATA, cliente.getData()); // get data
+        values.put(KEY_AVALCLIENTE, cliente.getAval());
  
         // 3. insert
         db.insert(TABLE_CLIENTE, // table
@@ -360,10 +396,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Cliente cliente = new Cliente();
         cliente.setEmail(cursor.getString(0));
         cliente.setSenha(cursor.getString(1));
-        cliente.setNome(cursor.getString(2));
-        cliente.setEndereco(cursor.getString(3));
-        cliente.setTelefone(cursor.getString(4));
-        cliente.setData(cursor.getString(5));
         //Log.d("bla","email:"+cliente.getEmail()+"senha:"+cliente.getSenha());
         //as.endereco = cliente.getEndereco();
         //as.nome = cliente.getNome();
@@ -402,6 +434,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         cliente.setEndereco(cursor.getString(3));
         cliente.setTelefone(cursor.getString(4));
         cliente.setData(cursor.getString(5));
+        cliente.setAval(cursor.getInt(6));
         Log.d("bla","email:"+cliente.getEmail()+"senha:"+cliente.getSenha());
         
         //delete
@@ -472,6 +505,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 cliente.setEndereco(cursor.getString(3));
                 cliente.setTelefone(cursor.getString(4));
                 cliente.setData(cursor.getString(5));
+                cliente.setAval(cursor.getInt(6));
  
                 // Add book to books
                 clientes.add(cliente);
@@ -532,5 +566,29 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Log.d("deleteCliente", cliente.toString());
  
     }
-    
+
+	public int updateClienteAval(String email, int realScore) {
+		// 
+        // 1. get reference to writable DB
+        SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("email_2",email);
+        Log.d("aval_banco_2",""+realScore);
+        // 2. create ContentValues to add key "column"/value
+        ContentValues values = new ContentValues();
+        values.put("avaluser", realScore);
+        // 3. updating row
+        try{
+        int i = db.update(TABLE_CLIENTE, //table
+                values, // column/value
+                KEY_EMAIL+" = ?", // selections
+                new String[] { email }); //selection args
+        }catch(SQLException e){
+        	Log.d("erro","deu ruim");
+        	return 0;
+        }
+        // 4. close
+        db.close();
+ 
+        return 1;	
+	}   
 }

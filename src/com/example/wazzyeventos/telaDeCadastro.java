@@ -55,7 +55,7 @@ public class telaDeCadastro extends ActionBarActivity {
 				
 				if(email.length()>0 && senha.length()>0 && nome.length()>0 && end.length()>0 && tell.length()>0 && end.length()>0){
 				
-					db.addCliente (new Cliente(email,senha,nome,end,tell,data));
+					db.addCliente (new Cliente(email,senha,nome,end,tell,data,0));
 					//Notificação
 					finish();			
 					// db.addCliente (new Cliente("han@unifei","han123","han","ruadhan","otelldhan","1982342"));

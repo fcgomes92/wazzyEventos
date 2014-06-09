@@ -59,7 +59,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 				
 			
 				if(nome.length()>0&&local.length()>0&&descricao.length()>0){
-					db.addEvento(new Evento(nome,local,descricao),login);
+					db.addEvento(new Evento(nome,local,descricao, 0),login,0);
 					Log.d("Sucesso Criação Evento", "Evento criado com sucesso, pelo usuário: "+ login +"!");
 					finish();
 				}

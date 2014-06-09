@@ -63,6 +63,8 @@ public class telaBuscaUsuario extends ActionBarActivity {
 				usuario_escolhido.putExtra("usuario_escolhido_end", clientes.get(pos).getEndereco());
 				usuario_escolhido.putExtra("usuario_escolhido_tel", clientes.get(pos).getTelefone());
 				usuario_escolhido.putExtra("usuario_escolhido_dtnsc", clientes.get(pos).getData());
+				usuario_escolhido.putExtra("usuario_escolhido_aval", clientes.get(pos).getAval());
+				Log.d("user_aval_1", ""+clientes.get(pos).getAval());
 				startActivity(usuario_escolhido);
 			}
 		});
@@ -82,8 +84,7 @@ public class telaBuscaUsuario extends ActionBarActivity {
 				for(int i = 0 ; i < clientes.size() ; i++){
 					nomes_clientes.add(clientes.get(i).getNome());
 					Log.d("Nome: ", nomes_clientes.get(i));
-					adapter = new ArrayAdapter(ctx,
-					        android.R.layout.simple_list_item_1, nomes_clientes);
+					adapter = new ArrayAdapter(ctx, android.R.layout.simple_list_item_1, nomes_clientes);
 					lista.setAdapter(adapter);
 				}
 			}

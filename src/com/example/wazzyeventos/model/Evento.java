@@ -7,19 +7,21 @@ import android.util.Log;
 public class Evento {
 	public MySQLiteHelper db;
 
-	String nome;
-	String local;
-	String descricao;
-	String login;
-	int id;
+	private String nome;
+	private String local;
+	private String descricao;
+	private String login;
+	private int id;
+	private int aval;
  
     public Evento(){
     }
-    public Evento(String nome, String local, String descricao) {
+    public Evento(String nome, String local, String descricao, int aval) {
         super();
     	this.setNome(nome);
 		this.setLocal(local);
 		this.setDescricao(descricao);
+		this.setAval(aval);
     }
     //objeto temporario pra funcao de pegar eventos e jogar em uma lista
     public Evento(String nome, String local, String descricao,String login) {
@@ -31,7 +33,14 @@ public class Evento {
     }
  
     //getters & setters
- 
+    public void setAval(int aval){
+    	this.aval = aval;
+    }
+    
+    public int getAval(){
+    	return this.aval;
+    }
+    
     public void setId(int id){
 		this.id = id;
 	}

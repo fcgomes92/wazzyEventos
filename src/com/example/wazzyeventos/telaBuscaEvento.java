@@ -160,20 +160,16 @@ public class telaBuscaEvento extends ActionBarActivity {
 				// segundo o nome -> Cria activity de consulta com os
 				// dados do banco
 				Evento ev = new Evento();
-				//Toast.makeText(ctx, "PORRA!: "+idCerto, Toast.LENGTH_SHORT);
 				ev = db.getEvento(ids.get(itemPosition));
+				consultaEvento.putExtra("Evento_id", ev.getId());
 				consultaEvento.putExtra("Evento_nome", ev.getNome());
 				consultaEvento.putExtra("Evento_local", ev.getLocal());
 				consultaEvento.putExtra("Evento_descricao", ev.getDescricao());
 				consultaEvento.putExtra("Evento_dono", ev.getLogin());
-				
-				
+				consultaEvento.putExtra("Evento_aval", ev.getAval());
 				startActivity(consultaEvento);
 			}
 		});
-		
-		
-		
 	}
 
 	@Override

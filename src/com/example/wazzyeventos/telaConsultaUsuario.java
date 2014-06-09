@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
+
 public class telaConsultaUsuario extends ActionBarActivity {
 	
 	public TextView nome_user, email_user, end_user, tel_user, dataNasc_user;
@@ -23,7 +26,9 @@ public class telaConsultaUsuario extends ActionBarActivity {
 	public Button bt_avaliar;
 	public RatingBar rtbar_user;
 	private Context ctx;
+	private int realScore;
 	public RadioButton e1, e2, e3, e4, e5;
+	private MySQLiteHelper db = new MySQLiteHelper(this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +42,18 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		this.tel_user = (TextView) this.findViewById(R.id.text_telUser_consultaUser);
 		this.dataNasc_user = (TextView) this.findViewById(R.id.text_dataNasc_consultaUser);
 		
-		// Barra de estrelas
-		this.rtbar_user = (RatingBar) this.findViewById(R.id.rtbar_geral_user);
-		
 		//Setting dados do usuario escolhido
 		this.nome_user.setText("Nome: " + getIntent().getExtras().getString("usuario_escolhido_nome"));
 		this.email_user.setText("Email: " + getIntent().getExtras().getString("usuario_escolhido_email"));
 		this.end_user.setText("Endereço: " + getIntent().getExtras().getString("usuario_escolhido_end"));
 		this.tel_user.setText("Telefone: " + getIntent().getExtras().getString("usuario_escolhido_tel"));
-		this.dataNasc_user.setText("Data Nascimento: " + getIntent().getExtras().getString("usuario_dtnsc"));
+		this.dataNasc_user.setText("Data Nascimento: " + getIntent().getExtras().getString("usuario_escolhido_dtnsc"));
+		
+		// Barra de estrelas
+		this.rtbar_user = (RatingBar) this.findViewById(R.id.rtbar_geral_user);
+		this.realScore =  getIntent().getExtras().getInt("usuario_escolhido_aval");
+		this.rtbar_user.setRating(realScore);
+		Log.d("user_aval", ""+realScore);
 		
 		//RadioBtsde avaliacao
 		this.e1 = (RadioButton) this.findViewById(R.id.rb_1estrela_consultaEvento);
@@ -75,9 +83,15 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		public void onClick(View v) {
 			if (v == bt_avaliar){
 				if(user_score != 0){
-					rtbar_user.setRating(user_score);
+					realScore = (user_score + realScore)/2;
+					rtbar_user.setRating(realScore);
+					db.updateClienteAval(getIntent().getExtras().getString("usuario_escolhido_email"),realScore);
+					finish();
 				}
-				else Toast.makeText(ctx, "Avalie utilizando a barra acima!" , Toast.LENGTH_SHORT).show();	
+				else{
+					Toast.makeText(ctx, "Avalie utilizando a barra acima!" , Toast.LENGTH_SHORT).show();
+					rtbar_user.setRating(realScore);
+				}
 			}
 		}
 	}; 
