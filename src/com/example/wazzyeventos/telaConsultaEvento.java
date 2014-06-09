@@ -2,6 +2,8 @@ package com.example.wazzyeventos;
 
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +13,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class telaConsultaEvento extends ActionBarActivity {
 	
-	public Button bt_editar, bt_deletar;
+	
 	public TextView nome_evento, local_evento, desc_evento, dono_evento;
 	public RadioButton e1, e2, e3, e4, e5;
 	public String evento_score;
@@ -27,8 +30,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		setContentView(R.layout.telaconsultaevento);
 		
 		//Sets das instancias do XML
-		this.bt_editar = (Button) this.findViewById(R.id.bt_editar_consltaEvento);
-		this.bt_deletar = (Button) this.findViewById(R.id.bt_deletar_consultaEvento); //Somente funciona se o usuario for dono do evento
+		
 		this.nome_evento = (TextView) this.findViewById(R.id.text_nome_evento_consultaEvento);
 		this.local_evento = (TextView) this.findViewById(R.id.text_local_evento_consultaEvento);
 		this.desc_evento = (TextView) this.findViewById(R.id.text_desc_evento_consultaEvento);
@@ -50,8 +52,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		
 		this.evento_score = "0";
 		
-		this.bt_editar.setOnClickListener(handler);
-		this.bt_deletar.setOnClickListener(handler);
+		
 		
 		this.e1.setOnClickListener(rb_handler);
 		this.e2.setOnClickListener(rb_handler);
@@ -59,20 +60,13 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.e4.setOnClickListener(rb_handler);
 		this.e5.setOnClickListener(rb_handler);
 		
+	
+		
+		
 	}
 		
 	
-	public OnClickListener handler = new OnClickListener() {
-		
-		public void onClick(View v) {
-			if(v == bt_editar){
-				
-			}
-			if(v == bt_deletar){
-				
-			}
-		}
-	}; 
+	
 	
 	public OnClickListener rb_handler = new OnClickListener() {
 		

@@ -30,6 +30,9 @@
         <activity android:name="com.example.wazzyeventos.telaRemoverUsuario"/>
         <activity android:name="com.example.wazzyeventos.telaAlterarUsuario"/>
         <activity android:name="com.example.wazzyeventos.telaConsultaEvento"/>
+    	<activity android:name="com.example.wazzyeventos.telaListaEvento"/>
+    	<activity android:name="com.example.wazzyeventos.telaConsultameuseventos"/>
+    	<activity android:name="com.example.wazzyeventos.telaEditameuseventos"/>
     </application>
 
 </manifest>

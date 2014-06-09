@@ -200,9 +200,42 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         return lista;
     }
  
+    public List<Evento> getEventoByLogin(String login){
+    	  List<Evento> evts = new LinkedList<Evento>();
+    	  
+          // 1. build the query
+          String query = "SELECT  * FROM " + TABLE_EVENTO + " WHERE login = '"+login+"'";
+   
+          // 2. get reference to writable DB
+          SQLiteDatabase db = this.getWritableDatabase();
+          Cursor cursor = db.rawQuery(query, null);
+   
+          // 3. go over each row, build book and add it to list
+          Evento ev = null;
+          if (cursor.moveToFirst()) {
+              do {
+                  ev = new Evento();
+                  ev.setId(Integer.parseInt(cursor.getString(0)));
+                  ev.setNome(cursor.getString(1));
+                  ev.setLocal(cursor.getString(2));
+                  ev.setDescricao(cursor.getString(3));
+                  ev.setLogin(cursor.getString(4));
+                 
+                 
+                  // Add book to books
+                  evts.add(ev);
+              } while (cursor.moveToNext());
+          }
+   
+          Log.d("getAllBooks()", evts.toString());
+   
+          // return books
+          return evts;
+    	
+    	
+    }
     
-    
-    // Get All Books
+    // Get All Evento
     public List<Evento> getAllEventos() {
         List<Evento> evts = new LinkedList<Evento>();
  
@@ -237,21 +270,22 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
  
      // Updating single book
-    public int updateEvento(Evento ev) {
+    public int updateEvento(String nome,String local,String descricao,int id) {
  
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
  
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put(KEY_NOME,"UTOUCHMYTRALALA"); // get title 
-        values.put(KEY_LOCAL, "HMMMYDINGDINGDONG"); // get author
+        values.put(KEY_NOME,nome); 
+        values.put(KEY_LOCAL, local);
+        values.put(KEY_DESCRICAO,descricao);
  
         // 3. updating row
         int i = db.update(TABLE_EVENTO, //table
                 values, // column/value
                 KEY_ID+" = ?", // selections
-                new String[] { String.valueOf(ev.getId()) }); //selection args
+                new String[] { String.valueOf(id) }); //selection args
  
         // 4. close
         db.close();
@@ -261,7 +295,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     }
  
     // Deleting single book
-    public void deleteBook(Evento ev) {
+    public void deleteEvento(Evento ev) {
  
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
@@ -274,7 +308,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // 3. close
         db.close();
  
-        Log.d("deleteBook", ev.toString());
+        Log.d("deleteEvento", ev.toString());
  
     }
     

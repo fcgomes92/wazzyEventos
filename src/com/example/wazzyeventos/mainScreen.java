@@ -16,10 +16,11 @@ import android.widget.Button;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento,bt_consulta_evento, bt_acessar_site;
+	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site;
 	public Button bt_consulta_usuario, bt_deletar_Usuario, bt_alterar_usuario;
 	public Intent cadastrarEvento;
 	public Intent buscarEvento;
+	public Intent meusEventos;
 	public Intent pesquisaS,removeS,alterarS;
 	public String login, url_siteProj;
 	
@@ -42,8 +43,10 @@ public class mainScreen extends ActionBarActivity {
 		//Evento
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
 		this.bt_consulta_evento = (Button) this.findViewById(R.id.bt_consultar_evento_ms);
+		this.bt_meuseventos = (Button) this.findViewById(R.id.bt_meus_eventos_ms);
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
 		this.buscarEvento = new Intent(this, telaBuscaEvento.class);
+		this.meusEventos = new Intent(this, telaListaEvento.class);
 		
 		//Site
 		this.bt_acessar_site = (Button) this.findViewById(R.id.bt_acesso_site);
@@ -92,6 +95,14 @@ public class mainScreen extends ActionBarActivity {
 				public void onClick(View v) {
 					startActivity(pesquisaS);
 					
+				}
+			});
+			this.bt_meuseventos.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+				meusEventos.putExtra("login_e", login);
+				startActivity(meusEventos);	
 				}
 			});
 	}
