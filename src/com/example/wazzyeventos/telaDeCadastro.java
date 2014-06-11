@@ -1,13 +1,10 @@
 package com.example.wazzyeventos;
 
-import com.example.wazzyeventos.model.Cliente;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,12 +13,17 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.wazzyeventos.model.Cliente;
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaDeCadastro extends ActionBarActivity {
 	
 	public Button bt_cadastrar;
 	public EditText field_senha, field_nome, field_email, field_endereco, field_telefone, field_data;
 	private MySQLiteHelper db = new MySQLiteHelper(this);
+	private Context ctx;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class telaDeCadastro extends ActionBarActivity {
 		field_telefone = (EditText) findViewById(R.id.field_telefone_cadastro);
 		field_data = (EditText) findViewById(R.id.field_datanascimento_cadastro);
 		
+		this. ctx = this;
+		
 		this.bt_cadastrar.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -57,6 +61,7 @@ public class telaDeCadastro extends ActionBarActivity {
 				
 					db.addCliente (new Cliente(email,senha,nome,end,tell,data,0));
 					//Notificação
+					Toast.makeText(ctx, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT);
 					finish();			
 					// db.addCliente (new Cliente("han@unifei","han123","han","ruadhan","otelldhan","1982342"));
 				}

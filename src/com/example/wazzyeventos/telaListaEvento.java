@@ -141,6 +141,7 @@ public class telaListaEvento extends ActionBarActivity{
 				consultaEvento.putExtra("Evento_descricao", ev.getDescricao());
 				consultaEvento.putExtra("Evento_dono", ev.getLogin());
 				consultaEvento.putExtra("eventoid", ev.getId());
+				consultaEvento.putExtra("Evento_aval", ev.getAval());
 				startActivity(consultaEvento);
 				finish();
 			}

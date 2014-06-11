@@ -83,7 +83,8 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		public void onClick(View v) {
 			if (v == bt_avaliar){
 				if(user_score != 0){
-					realScore = (user_score + realScore)/2;
+					if (realScore == 0) realScore=user_score;
+					else realScore = (user_score + realScore)/2;
 					rtbar_user.setRating(realScore);
 					db.updateClienteAval(getIntent().getExtras().getString("usuario_escolhido_email"),realScore);
 					finish();

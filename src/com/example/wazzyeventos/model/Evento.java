@@ -82,7 +82,7 @@ public class Evento {
     @Override
     public String toString() {
         return "Evento [id=" + this.id + ", nome=" + this.getNome() + ", local=" + this.getLocal()
-                + ", descricao="+ this.getDescricao() + ", login = "+login+"]";
+                + ", descricao="+ this.getDescricao() + ", login = "+login+", " + this.getAval() + "]";
     }
 
 }

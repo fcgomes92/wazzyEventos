@@ -10,100 +10,109 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/text_nome_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome" />
-
-    <EditText
-        android:id="@+id/field_nome_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/text_senha_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senha" />
-
-    <EditText
-        android:id="@+id/field_senha_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10"
-        android:maxLines="1"
-        android:password="true" />
-
-    <TextView
-        android:id="@+id/text_email_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Email" />
-
-    <EditText
-        android:id="@+id/field_email_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10"
-        android:maxLines="1">
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/text_endereco_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Endereço" />
-
-    <EditText
-        android:id="@+id/field_endereco_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/text_telefone_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Telefone" />
-
-    <EditText
-        android:id="@+id/field_telefone_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <TextView
-        android:id="@+id/text_datanascimento_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data Nascimento" />
-
-    <EditText
-        android:id="@+id/field_datanascimento_cadastro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
-
-    <LinearLayout
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/bt_cadastrar_cadastro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cadastrar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/text_nome_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome" />
+
+            <EditText
+                android:id="@+id/field_nome_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/text_senha_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senha" />
+
+            <EditText
+                android:id="@+id/field_senha_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLines="1"
+                android:password="true"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/text_email_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <EditText
+                android:id="@+id/field_email_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/text_endereco_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Endereço" />
+
+            <EditText
+                android:id="@+id/field_endereco_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10" />
+
+            <TextView
+                android:id="@+id/text_telefone_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone" />
+
+            <EditText
+                android:id="@+id/field_telefone_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/text_datanascimento_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data Nascimento" />
+
+            <EditText
+                android:id="@+id/field_datanascimento_cadastro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:singleLine="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="104dp" >
+
+                <Button
+                    android:id="@+id/bt_cadastrar_cadastro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:text="Cadastrar" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

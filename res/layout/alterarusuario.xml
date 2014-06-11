@@ -151,14 +151,6 @@
                     android:layout_alignParentLeft="true"
                     android:orientation="vertical" >
 
-                    <TextView
-                        android:id="@+id/txt_confirmar_senha"
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:layout_gravity="center_horizontal|center_vertical"
-                        android:text="Entre com sua senha para confirmar as alterações"
-                        android:textAppearance="?android:attr/absListViewStyle" />
-
                     <LinearLayout
                         android:id="@+id/senha"
                         android:layout_width="match_parent"
@@ -179,6 +171,16 @@
                             android:inputType="textPassword" />
                     </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/confirma_senha"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:text="Confirme sua senha para alterar"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
             </RelativeLayout>
         </LinearLayout>

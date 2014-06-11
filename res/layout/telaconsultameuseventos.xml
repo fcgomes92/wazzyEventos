@@ -34,59 +34,25 @@
         android:layout_height="wrap_content"
         android:text="Dono: " />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <TextView
-            android:id="@+id/text_aval_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Avaliação" />
-
-        <RadioButton
-            android:id="@+id/rb_1estrela_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/rb_2estrela_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/rb_3estrela_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/rb_4estrela_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RadioButton
-            android:id="@+id/rb_5estrela_consultameuEvento"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
 
         <Button
             android:id="@+id/bt_editar_consltameuEvento"
-            android:layout_width="100dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
             android:text="Editar" />
 
         <Button
             android:id="@+id/bt_deletar_consultameuEvento"
-            android:layout_width="100dp"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             android:text="Deletar" />
-
-    </LinearLayout>
+    </RelativeLayout>
     
 </LinearLayout>

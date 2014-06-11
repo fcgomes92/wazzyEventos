@@ -2,53 +2,75 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/text_remover_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="35dp"
-        android:layout_marginTop="55dp"
-        android:text="Email:" />
-
-    <TextView
-        android:id="@+id/text_emailcliente_remover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/text_remover_email"
-        android:layout_marginLeft="15dp"
-        android:layout_toRightOf="@+id/text_remover_email" />
-
     <Button
         android:id="@+id/bt_remover_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_remover_email"
-        android:layout_below="@+id/text_remover_email"
-        android:layout_marginTop="72dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:text="Encerrar Conta" />
 
-    <TextView
-        android:id="@+id/text_senha_remover"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/text_remover_email"
-        android:layout_below="@+id/text_remover_email"
-        android:layout_marginTop="22dp"
-        android:text="Senha:" />
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
 
-    <EditText
-        android:id="@+id/field_senha_remover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/text_senha_remover"
-        android:layout_alignBottom="@+id/text_senha_remover"
-        android:layout_alignLeft="@+id/text_emailcliente_remover"
-        android:ems="10"
-        android:inputType="textPassword" >
+        <TextView
+            android:id="@+id/text_remover_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="67dp"
+            android:text="Email:" />
 
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/text_emailcliente_remover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_remover_email"
+            android:layout_alignBottom="@+id/text_remover_email"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@+id/text_remover_email"
+            android:text="Email" />
+
+        <EditText
+            android:id="@+id/field_senha_remover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/text_senha_remover"
+            android:layout_alignBottom="@+id/text_senha_remover"
+            android:layout_alignLeft="@+id/text_emailcliente_remover"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1.78"
+            android:ems="10"
+            android:inputType="textPassword" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/text_senha_remover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/text_remover_email"
+            android:layout_below="@+id/text_remover_email"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:text="Senha:" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:text="Remover Conta"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

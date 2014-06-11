@@ -1,25 +1,22 @@
 package com.example.wazzyeventos;
 
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
-import com.example.wazzyeventos.model.Evento;
-
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.wazzyeventos.model.Evento;
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 
 public class telaCadastroEvento extends ActionBarActivity {
@@ -32,6 +29,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 	public String local;
 	public String login;
 	public String descricao;
+	public Context ctx;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +41,8 @@ public class telaCadastroEvento extends ActionBarActivity {
 		this.et_nome = (EditText) this.findViewById(R.id.field_nome_evento_ce);
 		this.et_local = (EditText) this.findViewById(R.id.field_local_evento_ce);
 		this.et_desc = (EditText) this.findViewById(R.id.field_desc_evento_ce);
+		
+		this.ctx = this;
 		
 		this.login = getIntent().getExtras().getString("login");
 		
@@ -61,6 +61,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 				if(nome.length()>0&&local.length()>0&&descricao.length()>0){
 					db.addEvento(new Evento(nome,local,descricao, 0),login,0);
 					Log.d("Sucesso Criação Evento", "Evento criado com sucesso, pelo usuário: "+ login +"!");
+					Toast.makeText(ctx, "Evento criado com sucesso!", Toast.LENGTH_SHORT).show();
 					finish();
 				}
 				

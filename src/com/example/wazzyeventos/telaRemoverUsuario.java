@@ -1,20 +1,16 @@
 package com.example.wazzyeventos;
 
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
@@ -24,11 +20,7 @@ public class telaRemoverUsuario extends ActionBarActivity {
 	private EditText senha;
 	public Intent menu;
 	private MySQLiteHelper db = new MySQLiteHelper(this);
-	
-	public void carregaTelaRemocao(){
-		setContentView(R.layout.removerusuario);
-		
-	}
+	private Context ctx;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +31,7 @@ public class telaRemoverUsuario extends ActionBarActivity {
 		email = (TextView) findViewById(R.id.text_emailcliente_remover);
 		senha = (EditText) findViewById(R.id.field_senha_remover);
 		email.setText(MainActivity.login);
+		ctx = this;
 		
 		bt_remover.setOnClickListener(new View.OnClickListener() {
 			
@@ -54,6 +47,7 @@ public class telaRemoverUsuario extends ActionBarActivity {
 					if(deletei == 1){
 						AlertDialog.Builder alert = new AlertDialog.Builder(telaRemoverUsuario.this);
 						//notificação
+						Toast.makeText(ctx, "Conta removida com sucesso!", Toast.LENGTH_SHORT);
 						finish();
 						
 					}

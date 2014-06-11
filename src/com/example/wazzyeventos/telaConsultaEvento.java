@@ -59,6 +59,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.bt_aval_evento = (Button) this.findViewById(R.id.bt_aval_evento);
 		this.rtbar_aval_geral_evento = (RatingBar) this.findViewById(R.id.rtbar_geral_evento);
 		this.realScore = getIntent().getExtras().getInt("Evento_aval");
+		this.rtbar_aval_geral_evento.setRating(realScore);
 		this.evento_score = 0;
 		
 		this.bt_aval_evento.setOnClickListener(handler); 
@@ -79,7 +80,8 @@ public class telaConsultaEvento extends ActionBarActivity {
 		public void onClick(View v){
 			if (v == bt_aval_evento){
 				if(evento_score != 0){
-					realScore = (evento_score + realScore)/2;
+					if (realScore == 0) realScore=evento_score;
+					else realScore = (evento_score + realScore)/2;
 					rtbar_aval_geral_evento.setRating(realScore);
 					db.updateEventoAval(getIntent().getExtras().getInt("Evento_id"),realScore);
 					finish();

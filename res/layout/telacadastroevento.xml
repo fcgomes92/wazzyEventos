@@ -9,55 +9,80 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.wazzyeventos.MainActivity$PlaceholderFragment" >
-    
-    <TextView
-        android:id="@+id/text_nome_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome do Evento" />
 
-    <EditText
-        android:id="@+id/field_nome_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/text_local_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Local do Evento" />
+        <TextView
+            android:id="@+id/text_nome_evento_ce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Evento" />
 
-    <EditText
-        android:id="@+id/field_local_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10" />
+        <EditText
+            android:id="@+id/field_nome_evento_ce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" >
 
-    <TextView
-        android:id="@+id/text_desc_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Descrição do Evento" />
+            <requestFocus />
+        </EditText>
 
-    <EditText
-        android:id="@+id/field_desc_evento_ce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|top"
-        android:ems="10"
-        android:maxLines="1"/>
+    </LinearLayout>
 
-    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/bt_cadastrar_evento"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="Cadastrar Evento" />
+        <TextView
+            android:id="@+id/text_local_evento_ce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Local do Evento" />
 
+        <EditText
+            android:id="@+id/field_local_evento_ce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/text_desc_evento_ce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descrição do Evento" />
+
+        <EditText
+            android:id="@+id/field_desc_evento_ce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLines="1" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/bt_cadastrar_evento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:text="Cadastrar Evento" />
+
+    </RelativeLayout>
     
 </LinearLayout>

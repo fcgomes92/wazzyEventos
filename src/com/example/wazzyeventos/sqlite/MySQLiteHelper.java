@@ -20,9 +20,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;
     // Database Name
-    private static final String DATABASE_NAME = "WazzyDB7";
-    
-    private MainActivity as;
+    private static final String DATABASE_NAME = "WazzyDB10";
     
     public MySQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);  
@@ -38,25 +36,25 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 "nome TEXT, "+
                 "endereco TEXT, "+
                 "telefone TEXT, "+
-                "datanasc TEXT, "
-                +"avaluser INTEGER"
-                + " )";
+                "datanasc TEXT, "+
+                "avaluser INTEGER"+
+                ")";
         // create books table
         db.execSQL(CREATE_CLIENTE_TABLE);
     	
     	//Criação de tabela de tabela
         // SQL statement to create book table
-        String CREATE_EVENTO_TABLE = "CREATE TABLE evento ( " +
+        String CREATE_EVENTO_TABLE1 = "CREATE TABLE evento ( " +
         		"id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
                 "nome TEXT, "+
                 "local TEXT, "
                 + "descricao TEXT, "
                 + "login TEXT, "
                 + "avalevento INTEGER, "
-                + "foreign key (login) references clientes (email) "
+                + "foreign key (login) references clientes (email)"
                 +" )";
         // create books table
-        db.execSQL(CREATE_EVENTO_TABLE);
+        db.execSQL(CREATE_EVENTO_TABLE1);
     }
  
     @Override
@@ -115,8 +113,6 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_DESCRICAO, ev.getDescricao());
         values.put(KEY_LOGIN,login);
         values.put(KEY_AVALEVENTO, aval);
-        
-        
       
         // 3. insert
         db.insert(TABLE_EVENTO, // table
@@ -308,25 +304,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		// 
         // 1. get reference to writable DB
         SQLiteDatabase db = this.getWritableDatabase();
-        Log.d("email_2",""+id);
-        Log.d("aval_banco_2",""+realScore);
+        Log.d("ID",""+id);
+        Log.d("aval_banco",""+realScore);
         // 2. create ContentValues to add key "column"/value
         ContentValues values = new ContentValues();
-        values.put("avalevento", realScore);
+        values.put(KEY_AVALEVENTO, ""+realScore);
         // 3. updating row
-        try{
-        int i = db.update(TABLE_CLIENTE, //table
+        int i = db.update(TABLE_EVENTO, //table
                 values, // column/value
-                KEY_EMAIL+" = ?", // selections
-                new String[] { ""+id }); //selection args
-        }catch(SQLException e){
-        	Log.d("erro","deu ruim");
-        	return 0;
-        }
+                KEY_ID+" = ?", // selections
+                new String[] { String.valueOf(id) }); //selection args
+        	db.close();
+        	
+        	return i;
         // 4. close
-        db.close();
  
-        return 1;	
 	} 
  
     // Deleting single book

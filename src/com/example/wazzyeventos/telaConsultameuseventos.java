@@ -26,7 +26,6 @@ public class telaConsultameuseventos extends ActionBarActivity {
 	
 	public Button bt_editar, bt_deletar;
 	public TextView nome_evento, local_evento, desc_evento, dono_evento;
-	public RadioButton e1, e2, e3, e4, e5;
 	public String evento_score;
 	public int id;
 	private MySQLiteHelper db = new MySQLiteHelper(this);
@@ -54,14 +53,6 @@ public class telaConsultameuseventos extends ActionBarActivity {
 		desc_evento.setText("Descrição do Evento: "+ev.getDescricao());
 		dono_evento.setText("Dono: "+ev.getLogin());
 		
-		
-		//RadioBtsde avaliacao
-		this.e1 = (RadioButton) this.findViewById(R.id.rb_1estrela_consultameuEvento);
-		this.e2 = (RadioButton) this.findViewById(R.id.rb_2estrela_consultameuEvento);
-		this.e3 = (RadioButton) this.findViewById(R.id.rb_3estrela_consultameuEvento);
-		this.e4 = (RadioButton) this.findViewById(R.id.rb_4estrela_consultameuEvento);
-		this.e5 = (RadioButton) this.findViewById(R.id.rb_5estrela_consultameuEvento);
-		
 		//Instâncias dos Intents
 		editaEvento = new Intent(this,telaEditameuseventos.class);
 		
@@ -69,16 +60,6 @@ public class telaConsultameuseventos extends ActionBarActivity {
 		
 		this.bt_editar.setOnClickListener(handler);
 		this.bt_deletar.setOnClickListener(handler);
-		
-		this.e1.setOnClickListener(rb_handler);
-		this.e2.setOnClickListener(rb_handler);
-		this.e3.setOnClickListener(rb_handler);
-		this.e4.setOnClickListener(rb_handler);
-		this.e5.setOnClickListener(rb_handler);
-
-		
-		
-		
 	}
 		
 	
@@ -130,48 +111,6 @@ public class telaConsultameuseventos extends ActionBarActivity {
 			}
 		}
 	}; 
-	
-	public OnClickListener rb_handler = new OnClickListener() {
-		
-		@Override
-		public void onClick(View v) {
-			e1.setChecked(false);
-			e2.setChecked(false);
-			e3.setChecked(false);
-			e4.setChecked(false);
-			e5.setChecked(false);
-			if (v == e1){
-				e1.setChecked(true);
-				evento_score = "1";
-			}
-			if (v == e2){
-				e1.setChecked(true);
-				e2.setChecked(true);
-				evento_score = "2";
-			}
-			if (v == e3){
-				e1.setChecked(true);
-				e2.setChecked(true);
-				e3.setChecked(true);
-				evento_score = "3";
-			}
-			if (v == e4){
-				e1.setChecked(true);
-				e2.setChecked(true);
-				e3.setChecked(true);
-				e4.setChecked(true);
-				evento_score = "4";
-			}
-			if (v == e5){
-				e1.setChecked(true);
-				e2.setChecked(true);
-				e3.setChecked(true);
-				e4.setChecked(true);
-				e5.setChecked(true);
-				evento_score = "5";
-			}
-		}
-	};
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

@@ -66,6 +66,7 @@ public class telaBuscaUsuario extends ActionBarActivity {
 				usuario_escolhido.putExtra("usuario_escolhido_aval", clientes.get(pos).getAval());
 				Log.d("user_aval_1", ""+clientes.get(pos).getAval());
 				startActivity(usuario_escolhido);
+				finish();
 			}
 		});
        
