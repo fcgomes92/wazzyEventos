@@ -105,5 +105,10 @@ public class MainActivity extends ActionBarActivity {
 			return rootView;
 		}
 	}
+
+	protected boolean isRouteDisplayed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
 

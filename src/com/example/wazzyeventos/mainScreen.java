@@ -17,12 +17,12 @@ import android.widget.Toast;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site;
+	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site, bt_ondeEstou;
 	public Button bt_consulta_usuario, bt_deletar_Usuario, bt_alterar_usuario;
 	public Intent cadastrarEvento;
 	public Intent buscarEvento;
 	public Intent meusEventos;
-	public Intent pesquisaS,removeS,alterarS;
+	public Intent pesquisaS,removeS,alterarS, ondeEstouS;
 	public String login, url_siteProj;
 	
 	@Override
@@ -38,8 +38,10 @@ public class mainScreen extends ActionBarActivity {
 		this.bt_consulta_usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
 		this.bt_deletar_Usuario = (Button) this.findViewById(R.id.bt_del_conta_ms);
 		this.bt_alterar_usuario = (Button) this.findViewById(R.id.bt_meu_perfil_ms);
+		this.bt_ondeEstou = (Button) this.findViewById(R.id.bt_onde_estou);
 		this.removeS = new Intent(this, telaRemoverUsuario.class);
 		this.alterarS = new Intent(this, telaAlterarUsuario.class);
+		this.ondeEstouS = new Intent(this, gpsControle.class);
 		
 		//Evento
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
@@ -72,7 +74,15 @@ public class mainScreen extends ActionBarActivity {
 		
 		this.bt_criar_evento.setOnClickListener(login_cadastro);
 		
-			bt_alterar_usuario.setOnClickListener(new View.OnClickListener() {
+		this.bt_ondeEstou.setOnClickListener(new OnClickListener() {
+					
+				@Override
+				public void onClick(View v) {
+					startActivity(ondeEstouS);
+				}
+		});
+		
+		this.bt_alterar_usuario.setOnClickListener(new View.OnClickListener() {
 			
 				@Override
 				public void onClick(View v) {

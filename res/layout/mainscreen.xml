@@ -72,6 +72,12 @@
                 android:text="Acessar Site Projeto" />
 
             <Button
+                android:id="@+id/bt_onde_estou"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Onde estou?" />
+
+            <Button
                 android:id="@+id/bt_del_conta_ms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
