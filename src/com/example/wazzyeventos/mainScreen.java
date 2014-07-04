@@ -24,6 +24,7 @@ public class mainScreen extends ActionBarActivity {
 	public Intent meusEventos;
 	public Intent pesquisaS,removeS,alterarS, ondeEstouS;
 	public String login, url_siteProj;
+	public String ip;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

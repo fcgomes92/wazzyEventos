@@ -1,12 +1,19 @@
 package com.example.wazzyeventos;
 
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
-import android.app.AlertDialog;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +23,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.wazzyeventos.jsonctrl.JSONParser;
+import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -24,8 +35,26 @@ public class MainActivity extends ActionBarActivity {
 	public Intent mainclassI, cadastroUserI;
 	public static String login,senha,nome,endereco,telefone,data;
 	//public telaRemoverUsuario remove;
-	public MySQLiteHelper db = new MySQLiteHelper(this);
+	//public MySQLiteHelper db = new MySQLiteHelper(this);
 	
+	//Fase de conexão com o servidor usando JSON
+	private ProgressDialog pDialog;
+	private JSONParser jsonP;
+	
+	//php login script location:
+
+    //testing on your device
+    //put your local ip instead,  on windows, run CMD > ipconfig
+	//or in mac's terminal type ifconfig and look for the ip under en0 or en1
+	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
+
+    //testing on Emulator:
+	private static final String ip = "192.168.1.5";
+    private static final String LOGIN_URL = "http://"+ip+":1234/webservice/login.php";
+
+    //JSON element ids from repsonse of php script:
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +72,9 @@ public class MainActivity extends ActionBarActivity {
 		
 		this.bt_login.setOnClickListener(login_cadastro);
 		this.bt_cadastrar.setOnClickListener(login_cadastro);
+		
+		Log.d("Login1","Vai entrar!");
+		this.jsonP = new JSONParser();
 	}
 	
 	public OnClickListener login_cadastro = new OnClickListener() {
@@ -52,19 +84,13 @@ public class MainActivity extends ActionBarActivity {
 				mainclassI.putExtra("login", et_login.getText().toString());
 				login = et_login.getText().toString();
 				senha = et_senha.getText().toString();
-				int status = db.verificaCliente(login, senha);
-				if(status==1){
-					startActivity(mainclassI);
-				}else{
-					Log.d("errou de senha/login","errou feio, errou rude");
-					AlertDialog.Builder alert = new AlertDialog.Builder(MainActivity.this);
-					alert.setMessage("Login ou senha invalidos!");
-					alert.setTitle("Aviso");
-					alert.setNeutralButton("OK", null);
-					alert.show();
-				}
+				Log.d("Login1","Vai entrar!");
+				//Para poder executar a thread mais de uma vez
+				new AttemptLogin().execute();
+				
 		}
 			if(v == bt_cadastrar)
+				cadastroUserI.putExtra("ip", ip);
 				startActivity(cadastroUserI);
 		}
 	};
@@ -110,5 +136,69 @@ public class MainActivity extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	//AsyncTask is a seperate thread than the thread that runs the GUI
+	//Any type of networking should be done with asynctask.
+	class AttemptLogin extends AsyncTask<String, String, String> {
+
+			//three methods get called, first preExecture, then do in background, and once do
+			//in back ground is completed, the onPost execture method will be called.
+
+	        @Override
+	        protected void onPreExecute() {
+	            super.onPreExecute();
+	            Log.d("Login1","Entrou!");
+	            pDialog = new ProgressDialog(MainActivity.this);
+	            pDialog.setMessage("Tentando fazer o login...");
+	            pDialog.setIndeterminate(false);
+	            pDialog.setCancelable(true);
+	            pDialog.show();
+	        }
+
+			@Override
+			protected String doInBackground(String... args) {
+				int success;
+				try{
+					//Cria os parametros
+					List<NameValuePair> params = new ArrayList<NameValuePair>();
+					params.add(new BasicNameValuePair("username",login));
+					params.add(new BasicNameValuePair("password",senha));
+					Log.d("Requisicao","Começando");
+					
+					//requisição HTTP
+					JSONObject json = JSONParser.makeHttpRequest(LOGIN_URL, "POST", params);
+					
+					//Log da resposta json
+					Log.d("Login",json.toString());
+					
+					//Se o login for bem sucedido
+					success = json.getInt(TAG_SUCCESS);
+					if (success == 1){
+						Log.d("Login","Successful! " + json.toString());
+//						finish();
+						startActivity(mainclassI);
+						return json.getString(TAG_MESSAGE);
+					}
+					else{
+						Log.d("Login","Error! " + json.toString());
+						return json.getString(TAG_MESSAGE);
+					}
+				} catch (JSONException e){
+					e.printStackTrace();
+				}
+	            return null;
+
+			}
+
+	        protected void onPostExecute(String file_url) {
+	        	//Faz sumir o informativo de download
+	        	pDialog.dismiss();
+	        	if (file_url != null){
+	        		Toast.makeText(MainActivity.this, file_url, Toast.LENGTH_SHORT).show();
+	        	}
+	        }
+
+		}
+
 }
 

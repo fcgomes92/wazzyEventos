@@ -1,10 +1,21 @@
 package com.example.wazzyeventos;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.wazzyeventos.model.Cliente;
+import com.example.wazzyeventos.jsonctrl.JSONParser;
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaDeCadastro extends ActionBarActivity {
@@ -24,6 +35,18 @@ public class telaDeCadastro extends ActionBarActivity {
 	public EditText field_senha, field_nome, field_email, field_endereco, field_telefone, field_data;
 	private MySQLiteHelper db = new MySQLiteHelper(this);
 	private Context ctx;
+	
+	//Variaveis de campo de entrada
+	public String email,senha,nome,end,tell,data;
+	
+	//JSON
+	private JSONParser jsonParser = new JSONParser();
+	private ProgressDialog pDialog;
+	
+	private static String REGISTER_URL = "";
+	//Tags do script php
+	private static final String TAG_SUCCESS = "success";
+	private static final String TAG_MESSAGE = "message";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +65,15 @@ public class telaDeCadastro extends ActionBarActivity {
 		field_telefone = (EditText) findViewById(R.id.field_telefone_cadastro);
 		field_data = (EditText) findViewById(R.id.field_datanascimento_cadastro);
 		
+		//URL Server
+		this.REGISTER_URL= "http://"+getIntent().getExtras().getString("ip")+":1234/webservice/register.php";
+		
 		this. ctx = this;
 		
 		this.bt_cadastrar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				String email,senha,nome,end,tell,data;
 				email = field_email.getText().toString();
 				senha = field_senha.getText().toString();
 				nome = field_nome.getText().toString();
@@ -59,10 +84,12 @@ public class telaDeCadastro extends ActionBarActivity {
 				
 				if(email.length()>0 && senha.length()>0 && nome.length()>0 && end.length()>0 && tell.length()>0 && end.length()>0){
 				
-					db.addCliente (new Cliente(email,senha,nome,end,tell,data,0));
+					//db.addCliente (new Cliente(email,senha,nome,end,tell,data,0));
 					//Notificação
-					Toast.makeText(ctx, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT);
-					finish();			
+					//Toast.makeText(ctx, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT);
+					//Thread de execução.
+					new CreateUser().execute();
+					//finish();			
 					// db.addCliente (new Cliente("han@unifei","han123","han","ruadhan","otelldhan","1982342"));
 				}
 				else{
@@ -112,5 +139,56 @@ public class telaDeCadastro extends ActionBarActivity {
 					false);
 			return rootView;
 		}
+	}
+	
+	public class CreateUser extends AsyncTask<String, String, String> {
+
+		 protected void onPreExecute() {
+	            super.onPreExecute();
+	            pDialog = new ProgressDialog(telaDeCadastro.this);
+	            pDialog.setMessage("Tentando fazer o cadastro...");
+	            pDialog.setIndeterminate(false);
+	            pDialog.setCancelable(true);
+	            pDialog.show();
+	        }
+		
+		@Override
+		protected String doInBackground(String... params) {
+			int success;
+			try{
+				List<NameValuePair> params1 = new ArrayList<NameValuePair>();
+				params1.add(new BasicNameValuePair("email", email));
+				params1.add(new BasicNameValuePair("senha", senha));
+				params1.add(new BasicNameValuePair("nome", nome));
+				params1.add(new BasicNameValuePair("end", end));
+				params1.add(new BasicNameValuePair("tel", tell));
+				params1.add(new BasicNameValuePair("data", data));
+				
+				Log.d("Requisição de Inserção","Iniciado...");
+				
+				JSONObject json = jsonParser.makeHttpRequest(REGISTER_URL, "POST", params1);
+				
+				Log.d("Tentativa de Cadastro", json.toString());
+				
+				if ((success = json.getInt(TAG_SUCCESS))==1){
+					Log.d("Novo usuário", "Criado com sucesso!");
+					finish();
+					return json.getString(TAG_MESSAGE);
+				}else{
+					Log.d("Falha de cadastro", json.toString());
+					return json.getString(TAG_MESSAGE);
+				}
+			}catch (JSONException e){
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		protected void onPostExecute(String file_url){
+			pDialog.dismiss();
+			if (file_url != null) Toast.makeText(telaDeCadastro.this,file_url,Toast.LENGTH_SHORT).show();
+		}
+		
 	}
 }
