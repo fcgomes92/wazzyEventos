@@ -40,7 +40,6 @@ public class telaCadastroEvento extends ActionBarActivity {
 	public String local;
 	public String login;
 	public String descricao;
-	public static String ip = "192.168.1.5";
 	public Context ctx;
 	
 	private ProgressDialog pDialog;
@@ -53,7 +52,7 @@ public class telaCadastroEvento extends ActionBarActivity {
 	//or in mac's terminal type ifconfig and look for the ip under en0 or en1
 	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
 
-    //testing on Emulator:
+	public static String ip = "192.168.1.4";
     private static final String REGISTER_EVENT_URL = "http://"+ip+":1234/webservice/registerevento.php";
 
     //JSON element ids from repsonse of php script:

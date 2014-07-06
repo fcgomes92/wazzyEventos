@@ -42,10 +42,10 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.dono_evento = (TextView) this.findViewById(R.id.text_nome_dono_consultaEvento);
 		
 		//setando valores dos campos
-		this.nome_evento.setText("Nome do Evento: "+getIntent().getExtras().getString("Evento_nome"));  
-		this.local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("Evento_local"));  
-		this.desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("Evento_descricao"));  
-		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("Evento_dono"));  
+		this.nome_evento.setText("Nome do Evento: "+getIntent().getExtras().getString("nome"));  
+		this.local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("local"));  
+		this.desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("desc"));  
+		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("login"));  
 		
 		this.ctx = this;
 		
@@ -58,7 +58,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		
 		this.bt_aval_evento = (Button) this.findViewById(R.id.bt_aval_evento);
 		this.rtbar_aval_geral_evento = (RatingBar) this.findViewById(R.id.rtbar_geral_evento);
-		this.realScore = getIntent().getExtras().getInt("Evento_aval");
+		this.realScore = Integer.parseInt(getIntent().getExtras().getString("aval"));
 		this.rtbar_aval_geral_evento.setRating(realScore);
 		this.evento_score = 0;
 		

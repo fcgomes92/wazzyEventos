@@ -31,13 +31,14 @@ public class JSONParser {
  
     }
     
-    public JSONObject getJSONFromUrl(final String url) {
+    public JSONObject getJSONFromUrl(final String url, List<NameValuePair> params) {
 
         // Making HTTP request
         try {
             // Construct the client and the HTTP request.
             DefaultHttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(url);
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
 
             // Execute the POST request and store the response locally.
             HttpResponse httpResponse = httpClient.execute(httpPost);
@@ -71,7 +72,9 @@ public class JSONParser {
             // Close the input stream.
             is.close();
             // Convert the string builder data to an actual string.
+            Log.d("JSON String", sb.toString());
             json = sb.toString();
+            Log.d("JSON String", json);
         } catch (Exception e) {
             Log.e("Buffer Error", "Error converting result " + e.toString());
         }

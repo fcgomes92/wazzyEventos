@@ -1,16 +1,20 @@
 package com.example.wazzyeventos;
 
-import com.example.wazzyeventos.model.Evento;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
+import java.util.ArrayList;
+import java.util.List;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,25 +22,35 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.TextView;
+
+import com.example.wazzyeventos.jsonctrl.JSONParser;
 
 public class telaConsultameuseventos extends ActionBarActivity {
 	
 	public Button bt_editar, bt_deletar;
 	public TextView nome_evento, local_evento, desc_evento, dono_evento;
 	public String evento_score;
-	public int id;
-	private MySQLiteHelper db = new MySQLiteHelper(this);
 	public Intent editaEvento;
 	public Intent removeEvento;
+	public String id;
+	
+	// JSON Info
+		private ProgressDialog pDialog;
+		private JSONParser jsonP;
+				
+		//Server Info
+		public static String ip = "192.168.1.4";
+		private static final String DEL_EV_URL = "http://"+ip+":1234/webservice/delEvento.php";
+
+		//Tags JSON
+		private static final String TAG_SUCCESS = "success";
+		private static final String TAG_MESSAGE = "message";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaconsultameuseventos);
-		id = getIntent().getExtras().getInt("eventoid");
 				
 		//Sets das instancias do XML
 		this.bt_editar = (Button) this.findViewById(R.id.bt_editar_consltameuEvento);
@@ -47,11 +61,11 @@ public class telaConsultameuseventos extends ActionBarActivity {
 		this.dono_evento = (TextView) this.findViewById(R.id.text_nome_dono_consultameuEvento);
 		
 		//setando valores dos campos
-		Evento ev = db.getEvento(id);
-		nome_evento.setText("Nome do Evento: "+ev.getNome());
-		local_evento.setText("Local do Evento: "+ev.getLocal());
-		desc_evento.setText("Descrição do Evento: "+ev.getDescricao());
-		dono_evento.setText("Dono: "+ev.getLogin());
+		nome_evento.setText("Nome do Evento: "+getIntent().getExtras().getString("nome"));
+		local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("local"));
+		desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("desc"));
+		dono_evento.setText("Dono: "+getIntent().getExtras().getString("login"));
+		id = getIntent().getExtras().getString("id");
 		
 		//Instâncias dos Intents
 		editaEvento = new Intent(this,telaEditameuseventos.class);
@@ -67,10 +81,10 @@ public class telaConsultameuseventos extends ActionBarActivity {
 		
 		public void onClick(View v) {
 			if(v == bt_editar){
-				editaEvento.putExtra("Edita_evento_nome",getIntent().getExtras().getString("Evento_nome"));  
-				editaEvento.putExtra("Edita_evento_local",getIntent().getExtras().getString("Evento_local"));  
-				editaEvento.putExtra("Edita_evento_descricao",getIntent().getExtras().getString("Evento_descricao"));
-				editaEvento.putExtra("Edita_evento_id", id);
+				editaEvento.putExtra("Edita_evento_nome",getIntent().getExtras().getString("nome"));  
+				editaEvento.putExtra("Edita_evento_local",getIntent().getExtras().getString("local"));  
+				editaEvento.putExtra("Edita_evento_descricao",getIntent().getExtras().getString("desc"));
+				editaEvento.putExtra("Edita_evento_id",id);
 				startActivity(editaEvento);
 				finish();// volta pra tela principal
 				
@@ -83,31 +97,26 @@ public class telaConsultameuseventos extends ActionBarActivity {
 					
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
-						Evento evt = db.getEvento(id);
-						db.deleteEvento(evt);
+						//JSON
+						new delEvento().execute();
 						AlertDialog.Builder resposta = new AlertDialog.Builder(telaConsultameuseventos.this);
 						resposta.setTitle("Sucesso!")
 						.setMessage("Evento removido!")
 						.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-							
 							@Override
 							public void onClick(DialogInterface arg0, int arg1) {
 								finish();
-								
 							}
-						})
-						.show();
+						}).show();
 					}
 				});
 				pergunta.setNegativeButton("Não", new DialogInterface.OnClickListener() {
-					
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 						finish();
 					}
 				});
 				pergunta.show();
-				
 			}
 		}
 	}; 
@@ -147,5 +156,34 @@ public class telaConsultameuseventos extends ActionBarActivity {
 					false);
 			return rootView;
 		}
+	}
+	
+	public class delEvento extends AsyncTask<Void, Void, Boolean>{
+		@Override
+		protected void onPreExecute(){
+			super.onPreExecute();
+			pDialog = new ProgressDialog(telaConsultameuseventos.this);
+			pDialog.setMessage("Deletando Usuário...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... arg0) {
+			//Envio de parametros para deletar evento
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("id", id));
+			
+	        JSONParser jParser = new JSONParser();
+	        JSONObject json = jParser.getJSONFromUrl(DEL_EV_URL, params);
+	        return null;
+		}
+		
+		@Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            pDialog.dismiss();
+        }
 	}
 }

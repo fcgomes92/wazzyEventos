@@ -28,7 +28,6 @@ public class telaConsultaUsuario extends ActionBarActivity {
 	private Context ctx;
 	private int realScore;
 	public RadioButton e1, e2, e3, e4, e5;
-	private MySQLiteHelper db = new MySQLiteHelper(this);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +42,15 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		this.dataNasc_user = (TextView) this.findViewById(R.id.text_dataNasc_consultaUser);
 		
 		//Setting dados do usuario escolhido
-		this.nome_user.setText("Nome: " + getIntent().getExtras().getString("usuario_escolhido_nome"));
-		this.email_user.setText("Email: " + getIntent().getExtras().getString("usuario_escolhido_email"));
-		this.end_user.setText("Endereço: " + getIntent().getExtras().getString("usuario_escolhido_end"));
-		this.tel_user.setText("Telefone: " + getIntent().getExtras().getString("usuario_escolhido_tel"));
-		this.dataNasc_user.setText("Data Nascimento: " + getIntent().getExtras().getString("usuario_escolhido_dtnsc"));
+		this.nome_user.setText("Nome: " + getIntent().getExtras().getString("nome"));
+		this.email_user.setText("Email: " + getIntent().getExtras().getString("username"));
+		this.end_user.setText("Endereço: " + getIntent().getExtras().getString("endereco"));
+		this.tel_user.setText("Telefone: " + getIntent().getExtras().getString("telefone"));
+		this.dataNasc_user.setText("Data Nascimento: " + getIntent().getExtras().getString("datanasc"));
 		
 		// Barra de estrelas
 		this.rtbar_user = (RatingBar) this.findViewById(R.id.rtbar_geral_user);
-		this.realScore =  getIntent().getExtras().getInt("usuario_escolhido_aval");
+		this.realScore =  Integer.parseInt(getIntent().getExtras().getString("aval"));
 		this.rtbar_user.setRating(realScore);
 		Log.d("user_aval", ""+realScore);
 		
@@ -77,7 +76,6 @@ public class telaConsultaUsuario extends ActionBarActivity {
 		
 	}
 		
-	
 	public OnClickListener handler = new OnClickListener() {
 		
 		public void onClick(View v) {
@@ -86,7 +84,6 @@ public class telaConsultaUsuario extends ActionBarActivity {
 					if (realScore == 0) realScore=user_score;
 					else realScore = (user_score + realScore)/2;
 					rtbar_user.setRating(realScore);
-					db.updateClienteAval(getIntent().getExtras().getString("usuario_escolhido_email"),realScore);
 					finish();
 				}
 				else{

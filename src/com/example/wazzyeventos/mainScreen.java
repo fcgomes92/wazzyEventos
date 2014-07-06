@@ -23,8 +23,7 @@ public class mainScreen extends ActionBarActivity {
 	public Intent buscarEvento;
 	public Intent meusEventos;
 	public Intent pesquisaS,removeS,alterarS, ondeEstouS;
-	public String login, url_siteProj;
-	public String ip;
+	public String login, url_siteProj, senha;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,7 @@ public class mainScreen extends ActionBarActivity {
 		this.url_siteProj = "http://wazzyevenos.blogspot.com.br/2014/06/wazzy-eventos.html";
 		
 		this.login = getIntent().getExtras().getString("login");
+		this.senha = getIntent().getExtras().getString("senha");
 		Log.d("Login: ","Login: "+ login);
 	
 		Toast.makeText(this, "Não esqueça de acessar o nosso site!", Toast.LENGTH_SHORT).show();
@@ -87,9 +87,8 @@ public class mainScreen extends ActionBarActivity {
 			
 				@Override
 				public void onClick(View v) {
-					alterarS.putExtra("login_cliente", login);
+					alterarS.putExtra("login", login);
 					startActivity(alterarS);
-				
 				}
 			});
 		
@@ -97,6 +96,8 @@ public class mainScreen extends ActionBarActivity {
 			
 				@Override
 				public void onClick(View v) {
+					removeS.putExtra("username", login);
+					removeS.putExtra("senha", senha);
 					startActivity(removeS);
 					finish();
 				
@@ -115,7 +116,7 @@ public class mainScreen extends ActionBarActivity {
 				
 				@Override
 				public void onClick(View v) {
-				meusEventos.putExtra("login_e", login);
+				meusEventos.putExtra("login", login);
 				startActivity(meusEventos);	
 				}
 			});

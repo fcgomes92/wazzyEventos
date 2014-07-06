@@ -89,7 +89,7 @@ public class telaDeCadastro extends ActionBarActivity {
 					//Toast.makeText(ctx, "Usuário Cadastrado com Sucesso!", Toast.LENGTH_SHORT);
 					//Thread de execução.
 					new CreateUser().execute();
-					//finish();			
+					finish();			
 					// db.addCliente (new Cliente("han@unifei","han123","han","ruadhan","otelldhan","1982342"));
 				}
 				else{

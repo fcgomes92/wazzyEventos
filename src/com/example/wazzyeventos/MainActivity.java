@@ -49,7 +49,7 @@ public class MainActivity extends ActionBarActivity {
 	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
 
     //testing on Emulator:
-	private static final String ip = "192.168.1.5";
+	private static final String ip = "192.168.1.4";
     private static final String LOGIN_URL = "http://"+ip+":1234/webservice/login.php";
 
     //JSON element ids from repsonse of php script:
@@ -82,6 +82,7 @@ public class MainActivity extends ActionBarActivity {
 		public void onClick(View v) {
 			if(v == bt_login){
 				mainclassI.putExtra("login", et_login.getText().toString());
+				mainclassI.putExtra("senha", et_senha.getText().toString());
 				login = et_login.getText().toString();
 				senha = et_senha.getText().toString();
 				Log.d("Login1","Vai entrar!");
@@ -175,7 +176,7 @@ public class MainActivity extends ActionBarActivity {
 					success = json.getInt(TAG_SUCCESS);
 					if (success == 1){
 						Log.d("Login","Successful! " + json.toString());
-//						finish();
+						//finish();
 						startActivity(mainclassI);
 						return json.getString(TAG_MESSAGE);
 					}
