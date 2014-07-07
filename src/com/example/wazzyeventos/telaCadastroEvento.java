@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.model.Evento;
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 

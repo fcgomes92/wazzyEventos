@@ -22,6 +22,9 @@
     <meta-data
     android:name="com.google.android.maps.v2.API_KEY"
     android:value="AIzaSyAbg6JM7aoaCFmICDUaop45BoVrKL7J1Vw" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
     
     <application
         android:allowBackup="true"

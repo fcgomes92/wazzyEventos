@@ -26,7 +26,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class MainActivity extends ActionBarActivity {
 	
@@ -34,20 +33,11 @@ public class MainActivity extends ActionBarActivity {
 	public EditText et_login, et_senha;
 	public Intent mainclassI, cadastroUserI;
 	public static String login,senha,nome,endereco,telefone,data;
-	//public telaRemoverUsuario remove;
-	//public MySQLiteHelper db = new MySQLiteHelper(this);
 	
 	//Fase de conexão com o servidor usando JSON
 	private ProgressDialog pDialog;
 	private JSONParser jsonP;
 	
-	//php login script location:
-
-    //testing on your device
-    //put your local ip instead,  on windows, run CMD > ipconfig
-	//or in mac's terminal type ifconfig and look for the ip under en0 or en1
-	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
-
     //testing on Emulator:
 	private static final String ip = "192.168.1.4";
     private static final String LOGIN_URL = "http://"+ip+":1234/webservice/login.php";
@@ -87,8 +77,7 @@ public class MainActivity extends ActionBarActivity {
 				senha = et_senha.getText().toString();
 				Log.d("Login1","Vai entrar!");
 				//Para poder executar a thread mais de uma vez
-				new AttemptLogin().execute();
-				
+				new AttemptLogin().execute();				
 		}
 			if(v == bt_cadastrar)
 				cadastroUserI.putExtra("ip", ip);
@@ -137,14 +126,8 @@ public class MainActivity extends ActionBarActivity {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	//AsyncTask is a seperate thread than the thread that runs the GUI
-	//Any type of networking should be done with asynctask.
+
 	class AttemptLogin extends AsyncTask<String, String, String> {
-
-			//three methods get called, first preExecture, then do in background, and once do
-			//in back ground is completed, the onPost execture method will be called.
-
 	        @Override
 	        protected void onPreExecute() {
 	            super.onPreExecute();
@@ -200,6 +183,5 @@ public class MainActivity extends ActionBarActivity {
 	        }
 
 		}
-
 }
 
