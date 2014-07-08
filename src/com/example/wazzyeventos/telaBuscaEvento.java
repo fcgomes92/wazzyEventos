@@ -105,12 +105,14 @@ public class telaBuscaEvento extends ActionBarActivity {
 
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				String env_nome, env_local, env_login, env_desc, env_aval;
+				String env_nome, env_local, env_login, env_desc, env_aval, env_id;
+				env_id = mCommentList.get(position).get(TAG_ID).toString();
 				env_nome = mCommentList.get(position).get(TAG_NOME).toString();
 				env_local = mCommentList.get(position).get(TAG_LOCAL).toString();
 				env_login = mCommentList.get(position).get(TAG_LOGIN).toString();
 				env_desc = mCommentList.get(position).get(TAG_DESC).toString();
 				env_aval = mCommentList.get(position).get(TAG_AVAL).toString();
+				consultaEvento.putExtra("id", env_id);
 				consultaEvento.putExtra("nome", env_nome);
 				consultaEvento.putExtra("local", env_local);
 				consultaEvento.putExtra("login", env_login);

@@ -147,11 +147,6 @@ public class telaListaEvento extends ActionBarActivity{
 	
 	// Mantem os eventos atualizados
 		public void updateJSONData(){
-			// Instantiate the arraylist to contain all the JSON data.
-	    	// we are going to use a bunch of key-value pairs, referring
-	    	// to the json element name, and the content, for example,
-	    	// message it the tag, and "I'm awesome" as the content..
-	    	
 			//Envio de parametros de filtro
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("login",login));

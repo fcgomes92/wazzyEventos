@@ -1,9 +1,21 @@
 package com.example.wazzyeventos;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +28,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wazzyeventos.jsonctrl.JSONParser;
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaConsultaEvento extends ActionBarActivity {
@@ -26,8 +39,19 @@ public class telaConsultaEvento extends ActionBarActivity {
 	public RatingBar rtbar_aval_geral_evento;
 	public RadioButton e1, e2, e3, e4, e5;
 	public int realScore, evento_score;
-	private MySQLiteHelper db = new MySQLiteHelper(this);
+	public String id;
 	private Context ctx;
+	
+	//JSON para update de avaliação de evento
+	private ProgressDialog pDialog;
+	private JSONParser jsonP;
+
+	public static String ip = "192.168.1.4";
+    private static final String AVAL_EVENT_URL = "http://"+ip+":1234/webservice/updateAvalEvento.php";
+
+    //JSON element ids from repsonse of php script:
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +70,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("local"));  
 		this.desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("desc"));  
 		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("login"));  
+		this.id = getIntent().getExtras().getString("id");
 		
 		this.ctx = this;
 		
@@ -83,7 +108,7 @@ public class telaConsultaEvento extends ActionBarActivity {
 					if (realScore == 0) realScore=evento_score;
 					else realScore = (evento_score + realScore)/2;
 					rtbar_aval_geral_evento.setRating(realScore);
-					db.updateEventoAval(getIntent().getExtras().getInt("Evento_id"),realScore);
+					new updateAval().execute();
 					finish();
 				}
 				else{
@@ -171,5 +196,36 @@ public class telaConsultaEvento extends ActionBarActivity {
 					false);
 			return rootView;
 		}
+	}
+	
+	//Conexão avaliação banco
+	public class updateAval extends AsyncTask<Void, Void, Boolean>{
+
+		@Override
+		protected void onPreExecute(){
+			super.onPreExecute();
+			pDialog = new ProgressDialog(ctx);
+			pDialog.setMessage("Avaliando a avaliação do evento...");
+			pDialog.setIndeterminate(false);
+			pDialog.setCancelable(true);
+			pDialog.show();
+		}
+		
+		@Override
+		protected Boolean doInBackground(Void... arg0) {
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("aval",""+realScore));
+			params.add(new BasicNameValuePair("id", id));
+	         
+	        JSONParser jParser = new JSONParser();
+	        JSONObject json = jParser.getJSONFromUrl(AVAL_EVENT_URL, params);	                
+			return null;
+		}
+		
+		@Override
+        protected void onPostExecute(Boolean result) {
+            super.onPostExecute(result);
+            pDialog.dismiss();
+        }
 	}
 }

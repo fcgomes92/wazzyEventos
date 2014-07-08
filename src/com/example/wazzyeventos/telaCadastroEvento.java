@@ -43,13 +43,6 @@ public class telaCadastroEvento extends ActionBarActivity {
 	
 	private ProgressDialog pDialog;
 	private JSONParser jsonP;
-	
-	//php login script location:
-
-    //testing on your device
-    //put your local ip instead,  on windows, run CMD > ipconfig
-	//or in mac's terminal type ifconfig and look for the ip under en0 or en1
-	// private static final String LOGIN_URL = "http://xxx.xxx.x.x:1234/webservice/login.php";
 
 	public static String ip = "192.168.1.4";
     private static final String REGISTER_EVENT_URL = "http://"+ip+":1234/webservice/registerevento.php";
