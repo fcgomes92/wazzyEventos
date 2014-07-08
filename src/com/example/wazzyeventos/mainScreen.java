@@ -17,12 +17,13 @@ import android.widget.Toast;
 
 public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site;
+	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site, bt_minha_denuncia;
 	public Button bt_consulta_usuario, bt_deletar_Usuario, bt_alterar_usuario;
 	public Intent cadastrarEvento;
 	public Intent buscarEvento;
 	public Intent meusEventos;
 	public Intent pesquisaS,removeS,alterarS;
+	public Intent minhasDenuncias;
 	public String login, url_siteProj;
 	
 	@Override
@@ -38,8 +39,10 @@ public class mainScreen extends ActionBarActivity {
 		this.bt_consulta_usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
 		this.bt_deletar_Usuario = (Button) this.findViewById(R.id.bt_del_conta_ms);
 		this.bt_alterar_usuario = (Button) this.findViewById(R.id.bt_meu_perfil_ms);
+		this.bt_minha_denuncia = (Button) this.findViewById(R.id.bt_minhas_denuncias);
 		this.removeS = new Intent(this, telaRemoverUsuario.class);
 		this.alterarS = new Intent(this, telaAlterarUsuario.class);
+		this.minhasDenuncias = new Intent(this, telaListaDenuncia.class);
 		
 		//Evento
 		this.bt_criar_evento = (Button) this.findViewById(R.id.bt_criar_evento_ms);
@@ -81,6 +84,14 @@ public class mainScreen extends ActionBarActivity {
 				
 				}
 			});
+			
+		this.bt_minha_denuncia.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				startActivity(minhasDenuncias);
+			}
+		});
 		
 		this.bt_deletar_Usuario.setOnClickListener(new View.OnClickListener() {
 			

@@ -31,6 +31,8 @@ public class telaListaEvento extends ActionBarActivity{
 	private String login;
 	public MySQLiteHelper db;
 	public ListView listaevento;
+	
+	public static int idEvento_selecionado;
 
 	public Context ctx;
 	public Intent consultaEvento;
@@ -142,6 +144,9 @@ public class telaListaEvento extends ActionBarActivity{
 				consultaEvento.putExtra("Evento_dono", ev.getLogin());
 				consultaEvento.putExtra("eventoid", ev.getId());
 				consultaEvento.putExtra("Evento_aval", ev.getAval());
+				
+				idEvento_selecionado = ev.getId();
+				
 				startActivity(consultaEvento);
 				finish();
 			}

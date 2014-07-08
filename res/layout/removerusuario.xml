@@ -62,7 +62,7 @@
             android:text="Senha:" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/tx_nome_evento_denunciado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

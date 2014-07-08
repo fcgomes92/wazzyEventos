@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.wazzyeventos.mainScreen"/>
+        <activity android:name="com.example.wazzyeventos.denunciarEvento"/>
         <activity android:name="com.example.wazzyeventos.telaDeCadastro"/>
         <activity android:name="com.example.wazzyeventos.telaCadastroEvento"/>
         <activity android:name="com.example.wazzyeventos.telaBuscaEvento"/>
@@ -34,6 +35,8 @@
     	<activity android:name="com.example.wazzyeventos.telaConsultameuseventos"/>
     	<activity android:name="com.example.wazzyeventos.telaEditameuseventos"/>
         <activity android:name="com.example.wazzyeventos.telaConsultaUsuario"/>
+        <activity android:name="com.example.wazzyeventos.telaListaDenuncia"/>
+        <activity android:name="com.example.wazzyeventos.telaConsultaMinhasDenuncias"/>
     </application>
 
 </manifest>

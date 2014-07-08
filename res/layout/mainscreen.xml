@@ -60,6 +60,12 @@
                 android:text="Consultar Usuários" />
 
             <Button
+                android:id="@+id/bt_minhas_denuncias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Minhas Denúncias" />
+
+            <Button
                 android:id="@+id/bt_meu_perfil_ms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

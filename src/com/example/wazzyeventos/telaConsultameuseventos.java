@@ -1,5 +1,8 @@
 package com.example.wazzyeventos;
 
+import java.util.List;
+
+import com.example.wazzyeventos.model.Comentario;
 import com.example.wazzyeventos.model.Evento;
 import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
@@ -19,6 +22,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -31,17 +35,21 @@ public class telaConsultameuseventos extends ActionBarActivity {
 	private MySQLiteHelper db = new MySQLiteHelper(this);
 	public Intent editaEvento;
 	public Intent removeEvento;
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.telaconsultameuseventos);
 		id = getIntent().getExtras().getInt("eventoid");
-				
+		
+		
+
+		
 		//Sets das instancias do XML
 		this.bt_editar = (Button) this.findViewById(R.id.bt_editar_consltameuEvento);
 		this.bt_deletar = (Button) this.findViewById(R.id.bt_deletar_consultameuEvento); //Somente funciona se o usuario for dono do evento
-		this.nome_evento = (TextView) this.findViewById(R.id.text_nome_evento_consultameuEvento);
+		this.nome_evento = (TextView) this.findViewById(R.id.text_nome_evento_consultaMeuEvento);
 		this.local_evento = (TextView) this.findViewById(R.id.text_local_evento_consultameuEvento);
 		this.desc_evento = (TextView) this.findViewById(R.id.text_desc_evento_consultameuEvento);
 		this.dono_evento = (TextView) this.findViewById(R.id.text_nome_dono_consultameuEvento);
@@ -60,6 +68,8 @@ public class telaConsultameuseventos extends ActionBarActivity {
 		
 		this.bt_editar.setOnClickListener(handler);
 		this.bt_deletar.setOnClickListener(handler);
+	
+
 	}
 		
 	
