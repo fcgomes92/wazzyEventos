@@ -27,7 +27,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaConsultaUsuario extends ActionBarActivity {
 	

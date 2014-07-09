@@ -2,13 +2,14 @@ package com.example.wazzyeventos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -31,9 +32,8 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.model.Cliente;
-import com.example.wazzyeventos.telaBuscaEvento.loadEventos;
 
 public class telaBuscaUsuario extends ActionBarActivity {
 	
@@ -43,8 +43,6 @@ public class telaBuscaUsuario extends ActionBarActivity {
 	public Intent usuario_escolhido;
 	public ListView lista;
 	private Context ctx;
-	private List<Cliente> clientes = new LinkedList<Cliente>();
-	private List<String> nomes_clientes = new LinkedList<String>();
 	private ArrayAdapter<String> adapter; 
 	
 	// JSON Info

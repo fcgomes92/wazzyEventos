@@ -83,6 +83,15 @@
             android:layout_alignParentLeft="true"
             android:text="Cadastrar Evento" />
 
+        <Button
+            android:id="@+id/bt_gps_cadastro_evn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="Localização" />
+
     </RelativeLayout>
     
 </LinearLayout>

@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/tx_nome_evento_denunciado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup1"
+        android:layout_centerHorizontal="true"
+        android:text="Descreva o motivo da denuncia:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/edt_MotivoDenuncia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tx_nome_evento_denunciado"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/bt_denunciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/edt_MotivoDenuncia"
+        android:text="Denunciar" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tx_nome_evento_denunciado"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="67dp" >
+
+        <RadioButton
+            android:id="@+id/rd_eventoFalso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Evento Falso" />
+
+        <RadioButton
+            android:id="@+id/rd_eventoIlegal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Evento Ilegal" />
+
+        <RadioButton
+            android:id="@+id/rd_eventoErrado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Evento com informações erradas" />
+
+        <RadioButton
+            android:id="@+id/rd_outros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Outros" />
+    </RadioGroup>
+
+</RelativeLayout>

@@ -9,9 +9,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -23,7 +25,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
 
@@ -33,6 +34,7 @@ public class MainActivity extends ActionBarActivity {
 	public EditText et_login, et_senha;
 	public Intent mainclassI, cadastroUserI;
 	public static String login,senha,nome,endereco,telefone,data;
+	public Context ctx;
 	
 	//Fase de conexão com o servidor usando JSON
 	private ProgressDialog pDialog;
@@ -50,40 +52,40 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_main);
-		
+
 		//Sets das instancias do XML
 		this.bt_login = (Button) this.findViewById(R.id.bt_login);
 		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar);
+		
+		this.jsonP = new JSONParser();
 		
 		this.et_senha = (EditText) this.findViewById(R.id.et_senha);
 		this.et_login = (EditText) this.findViewById(R.id.et_login);
 		this.mainclassI = new Intent(this,mainScreen.class);
 		this.cadastroUserI = new Intent(this,telaDeCadastro.class);
+		this.ctx = this;
 		
-		this.bt_login.setOnClickListener(login_cadastro);
-		this.bt_cadastrar.setOnClickListener(login_cadastro);
-		
-		Log.d("Login1","Vai entrar!");
-		this.jsonP = new JSONParser();
-	}
-	
-	public OnClickListener login_cadastro = new OnClickListener() {
-		
-		public void onClick(View v) {
-			if(v == bt_login){
+		this.bt_login.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				mainclassI.putExtra("login", et_login.getText().toString());
 				mainclassI.putExtra("senha", et_senha.getText().toString());
 				login = et_login.getText().toString();
 				senha = et_senha.getText().toString();
-				Log.d("Login1","Vai entrar!");
 				//Para poder executar a thread mais de uma vez
-				new AttemptLogin().execute();				
-		}
-			if(v == bt_cadastrar)
+				new AttemptLogin().execute();		
+			}
+		});
+		this.bt_cadastrar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
 				cadastroUserI.putExtra("ip", ip);
 				startActivity(cadastroUserI);
-		}
-	};
+			}
+		});
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -141,6 +143,7 @@ public class MainActivity extends ActionBarActivity {
 
 			@Override
 			protected String doInBackground(String... args) {
+				Looper.prepare();
 				int success;
 				try{
 					//Cria os parametros
@@ -176,9 +179,6 @@ public class MainActivity extends ActionBarActivity {
 	        protected void onPostExecute(String file_url) {
 	        	//Faz sumir o informativo de download
 	        	pDialog.dismiss();
-	        	if (file_url != null){
-	        		Toast.makeText(MainActivity.this, file_url, Toast.LENGTH_SHORT).show();
-	        	}
 	        }
 
 		}

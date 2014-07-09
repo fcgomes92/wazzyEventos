@@ -39,8 +39,8 @@ public class telaBuscaEvento extends ActionBarActivity {
 	private EditText et_nome, et_local;
 	private String nome;
 	private String local;
+	private String logado;
 	public ListView listaevento;
-
 	public Context ctx;
 
 	public Intent consultaEvento;
@@ -62,6 +62,8 @@ public class telaBuscaEvento extends ActionBarActivity {
     private static final String TAG_LOCAL = "local";
     private static final String TAG_AVAL = "avalevento";
     private static final String TAG_DESC = "desc";
+    private static final String TAG_LAT = "latitude";
+    private static final String TAG_LON = "longitude";
     
 
     //An array of all of our comments
@@ -85,6 +87,7 @@ public class telaBuscaEvento extends ActionBarActivity {
 		// Cria um contexto pra add no ArrayAdapter
 		ctx = this;
 		
+		this.logado = getIntent().getExtras().getString("logado");
 		this.nome = "";
 		this.local = "";
 		
@@ -105,19 +108,24 @@ public class telaBuscaEvento extends ActionBarActivity {
 
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				String env_nome, env_local, env_login, env_desc, env_aval, env_id;
+				String env_nome, env_local, env_login, env_desc, env_aval, env_id, env_lat, env_lon;
 				env_id = mCommentList.get(position).get(TAG_ID).toString();
 				env_nome = mCommentList.get(position).get(TAG_NOME).toString();
 				env_local = mCommentList.get(position).get(TAG_LOCAL).toString();
 				env_login = mCommentList.get(position).get(TAG_LOGIN).toString();
 				env_desc = mCommentList.get(position).get(TAG_DESC).toString();
 				env_aval = mCommentList.get(position).get(TAG_AVAL).toString();
+				env_lat = mCommentList.get(position).get(TAG_LAT).toString();
+				env_lon = mCommentList.get(position).get(TAG_LON).toString();
 				consultaEvento.putExtra("id", env_id);
 				consultaEvento.putExtra("nome", env_nome);
 				consultaEvento.putExtra("local", env_local);
 				consultaEvento.putExtra("login", env_login);
 				consultaEvento.putExtra("desc", env_desc);
 				consultaEvento.putExtra("aval", env_aval);
+				consultaEvento.putExtra("lat", env_lat);
+				consultaEvento.putExtra("lon", env_lon);
+				consultaEvento.putExtra("logado", logado);
 				startActivity(consultaEvento);
 			}
 		});
@@ -190,6 +198,8 @@ public class telaBuscaEvento extends ActionBarActivity {
                 String login = c.getString(TAG_LOGIN);
                 String aval = c.getString(TAG_AVAL);
                 String desc = c.getString(TAG_DESC);
+                String lat = c.getString(TAG_LAT);
+                String lon = c.getString(TAG_LON);
                 
 	
 	                // creating new HashMap
@@ -201,6 +211,8 @@ public class telaBuscaEvento extends ActionBarActivity {
                 map.put(TAG_LOGIN, login);
                 map.put(TAG_AVAL, aval);
                 map.put(TAG_DESC, desc);
+                map.put(TAG_LAT, lat);
+                map.put(TAG_LON, lon);
                 
                 mCommentList.add(map);
             }

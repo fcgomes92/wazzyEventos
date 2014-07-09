@@ -8,9 +8,11 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,19 +28,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 
 public class telaCadastroEvento extends ActionBarActivity {
 	
-	public Button bt_cadastrar;
+	public Button bt_cadastrar, bt_gps;
+	public boolean marcador = true;
+	public Intent telagps;	
 	public EditText et_nome, et_local, et_desc,et_cidade;
-	 MySQLiteHelper db = new MySQLiteHelper(this);
 	//variaveis auxiliares
 	public String nome;
 	public String local;
 	public String login;
 	public String descricao;
+	public Double lat, lon;
 	public Context ctx;
 	
 	private ProgressDialog pDialog;
@@ -61,13 +64,30 @@ public class telaCadastroEvento extends ActionBarActivity {
 		this.jsonP = new JSONParser();
 		
 		this.bt_cadastrar = (Button) this.findViewById(R.id.bt_cadastrar_evento);
+		this.bt_gps = (Button) this.findViewById(R.id.bt_gps_cadastro_evn);
 		this.et_nome = (EditText) this.findViewById(R.id.field_nome_evento_ce);
 		this.et_local = (EditText) this.findViewById(R.id.field_local_evento_ce);
 		this.et_desc = (EditText) this.findViewById(R.id.field_desc_evento_ce);
 		
+		this.telagps = new Intent(this, GpsControle.class);
+		
 		this.ctx = this;
 		
 		this.login = getIntent().getExtras().getString("login");
+		
+		bt_gps.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+			if(marcador ==true){
+				telagps.putExtra("nome", et_nome.getText().toString());
+				telagps.putExtra("local", et_local.getText().toString());
+				telagps.putExtra("marcador", marcador);
+				telagps.putExtra("localiza",false);
+				startActivityForResult(telagps, 1);
+				}
+			}
+		});
 		
 		bt_cadastrar.setOnClickListener(new View.OnClickListener(){
 			
@@ -85,7 +105,6 @@ public class telaCadastroEvento extends ActionBarActivity {
 					//db.addEvento(new Evento(nome,local,descricao, 0),login,0);
 					new AttemptRegisterEvetno().execute();
 					Log.d("Sucesso Criação Evento", "Evento criado com sucesso, pelo usuário: "+ login +"!");
-					Toast.makeText(ctx, "Evento criado com sucesso!", Toast.LENGTH_SHORT).show();
 					finish();
 				}
 				
@@ -136,10 +155,23 @@ public class telaCadastroEvento extends ActionBarActivity {
 			return rootView;
 		}
 	}
+
+	@Override 
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {     
+		super.onActivityResult(requestCode, resultCode, data); 
+	    switch(requestCode) { 
+	    case (1) : { 
+	    	if (resultCode == Activity.RESULT_OK) {
+	    		lat= data.getDoubleExtra("latitude", 0);
+	    		lon= data.getDoubleExtra("longitude",0);
+	    		marcador = false;
+	        	} 
+	    	break; 
+	    	}
+	    } 
+	}
 	
-	//AsyncTask is a seperate thread than the thread that runs the GUI
-		//Any type of networking should be done with asynctask.
-		class AttemptRegisterEvetno extends AsyncTask<String, String, String> {
+	public class AttemptRegisterEvetno extends AsyncTask<String, String, String> {
 
 				//three methods get called, first preExecture, then do in background, and once do
 				//in back ground is completed, the onPost execture method will be called.
@@ -164,6 +196,8 @@ public class telaCadastroEvento extends ActionBarActivity {
 						params.add(new BasicNameValuePair("local",local));
 						params.add(new BasicNameValuePair("desc",descricao));
 						params.add(new BasicNameValuePair("login",login));
+						params.add(new BasicNameValuePair("latitude",lat+""));
+						params.add(new BasicNameValuePair("longitude",lon+""));
 						//requisição HTTP
 						JSONObject json = JSONParser.makeHttpRequest(REGISTER_EVENT_URL, "POST", params);
 						
@@ -192,7 +226,8 @@ public class telaCadastroEvento extends ActionBarActivity {
 		        	//Faz sumir o informativo de download
 		        	pDialog.dismiss();
 		        	if (file_url != null){
-		        		Toast.makeText(telaCadastroEvento.this, file_url, Toast.LENGTH_SHORT).show();
+		        		//Toast.makeText(ctx, file_url, Toast.LENGTH_SHORT).show();
+						//Toast.makeText(ctx, "Evento criado com sucesso!", Toast.LENGTH_SHORT).show();
 		        	}
 		        }
 

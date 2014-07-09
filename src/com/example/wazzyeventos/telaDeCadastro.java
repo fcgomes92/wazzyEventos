@@ -27,13 +27,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaDeCadastro extends ActionBarActivity {
 	
 	public Button bt_cadastrar;
 	public EditText field_senha, field_nome, field_email, field_endereco, field_telefone, field_data;
-	private MySQLiteHelper db = new MySQLiteHelper(this);
 	private Context ctx;
 	
 	//Variaveis de campo de entrada

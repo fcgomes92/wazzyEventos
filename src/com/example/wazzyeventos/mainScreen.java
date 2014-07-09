@@ -35,12 +35,9 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 
 @SuppressLint("NewApi") public class mainScreen extends ActionBarActivity {
 	
-	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site, bt_ondeEstou;
+	public Button bt_criar_evento,bt_consulta_evento,bt_meuseventos, bt_acessar_site, bt_minha_denuncia, bt_gps;
 	public Button bt_consulta_usuario, bt_deletar_Usuario, bt_alterar_usuario;
-	public Intent cadastrarEvento;
-	public Intent buscarEvento;
-	public Intent meusEventos;
-	public Intent pesquisaS,removeS,alterarS, ondeEstouS;
+	public Intent cadastrarEvento, buscarEvento, meusEventos, minhasDenuncias, telagps, pesquisaS,removeS,alterarS;
 	public String login, url_siteProj, senha;
 	public static Context ctx;
 	
@@ -72,10 +69,12 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 		this.bt_consulta_usuario = (Button) this.findViewById(R.id.bt_consultar_usuario_ms);
 		this.bt_deletar_Usuario = (Button) this.findViewById(R.id.bt_del_conta_ms);
 		this.bt_alterar_usuario = (Button) this.findViewById(R.id.bt_meu_perfil_ms);
-		this.bt_ondeEstou = (Button) this.findViewById(R.id.bt_onde_estou);
+		this.bt_minha_denuncia = (Button) this.findViewById(R.id.bt_minhas_denuncias);
+		this.bt_gps= (Button) this.findViewById(R.id.bt_gps);
+		
 		this.removeS = new Intent(this, telaRemoverUsuario.class);
 		this.alterarS = new Intent(this, telaAlterarUsuario.class);
-		this.ondeEstouS = new Intent(this, gpsControle.class);
+		this.minhasDenuncias = new Intent(this, telaListaDenuncia.class);
 		this.ctx = this;
 		
 		//Evento
@@ -85,6 +84,7 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 		this.cadastrarEvento = new Intent(this, telaCadastroEvento.class);
 		this.buscarEvento = new Intent(this, telaBuscaEvento.class);
 		this.meusEventos = new Intent(this, telaListaEvento.class);
+		this.telagps = new Intent(this, GpsControle.class);
 		
 		//Site
 		this.bt_acessar_site = (Button) this.findViewById(R.id.bt_acesso_site);
@@ -100,6 +100,26 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 		
 		this.bt_criar_evento.setOnClickListener(login_cadastro);
 		this.bt_consulta_evento.setOnClickListener(login_cadastro);
+		
+		this.bt_gps.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				telagps.putExtra("marcador", false);
+				telagps.putExtra("localiza", false);
+				startActivity(telagps);
+			}
+		});
+		
+		this.bt_minha_denuncia.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				minhasDenuncias.putExtra("login", login);
+				startActivity(minhasDenuncias);
+			}
+		});
+		
 		this.bt_acessar_site.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -109,14 +129,6 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 		});
 		
 		this.bt_criar_evento.setOnClickListener(login_cadastro);
-		
-		this.bt_ondeEstou.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					startActivity(ondeEstouS);
-				}
-		});
 		
 		this.bt_alterar_usuario.setOnClickListener(new View.OnClickListener() {
 			
@@ -147,7 +159,7 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 					
 				}
 			});
-			this.bt_meuseventos.setOnClickListener(new View.OnClickListener() {
+		this.bt_meuseventos.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
@@ -167,6 +179,7 @@ import com.example.wazzyeventos.jsonctrl.JSONParser;
 				startActivity(cadastrarEvento);
 			}
 			if(v == bt_consulta_evento){
+				buscarEvento.putExtra("logado", login);
 				startActivity(buscarEvento);
 			}
 		}

@@ -1,21 +1,19 @@
 package com.example.wazzyeventos;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,24 +21,28 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 public class telaConsultaEvento extends ActionBarActivity {
 	
 	
 	public TextView nome_evento, local_evento, desc_evento, dono_evento;
-	public Button bt_aval_evento;
+	public Button bt_aval_evento, bt_gps;
 	public RatingBar rtbar_aval_geral_evento;
 	public RadioButton e1, e2, e3, e4, e5;
 	public int realScore, evento_score;
-	public String id;
+	public String id, lat, lon, logado, login_recebe;
 	private Context ctx;
+	public Button bt_denuncia;
+	public Button bt_comentar;
+	public Intent denuncia, comentario, telagps;
 	
 	//JSON para update de avaliação de evento
 	private ProgressDialog pDialog;
@@ -64,13 +66,24 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.local_evento = (TextView) this.findViewById(R.id.text_local_evento_consultaEvento);
 		this.desc_evento = (TextView) this.findViewById(R.id.text_desc_evento_consultaEvento);
 		this.dono_evento = (TextView) this.findViewById(R.id.text_nome_dono_consultaEvento);
+		this.denuncia = new Intent(this,denunciarEvento.class);
+		this.comentario = new Intent(this,telaComentario.class);
+		this.telagps = new Intent(this,GpsControle.class);
+		this.bt_comentar = (Button) findViewById(R.id.bt_comentar);
+		this.bt_denuncia = (Button) findViewById(R.id.bt_denunciar_evento);
+		this.bt_gps = (Button) findViewById(R.id.bt_gps_consulta_evento);
+		
+		this.login_recebe = getIntent().getExtras().getString("login");
+		this.logado = getIntent().getExtras().getString("logado");
 		
 		//setando valores dos campos
 		this.nome_evento.setText("Nome do Evento: "+getIntent().getExtras().getString("nome"));  
 		this.local_evento.setText("Local do Evento: "+getIntent().getExtras().getString("local"));  
 		this.desc_evento.setText("Descrição do Evento: "+getIntent().getExtras().getString("desc"));  
-		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("login"));  
+		this.dono_evento.setText("Dono: "+getIntent().getExtras().getString("login")); 
 		this.id = getIntent().getExtras().getString("id");
+		this.lat = getIntent().getExtras().getString("lat");
+		this.lon = getIntent().getExtras().getString("lon");
 		
 		this.ctx = this;
 		
@@ -87,6 +100,37 @@ public class telaConsultaEvento extends ActionBarActivity {
 		this.rtbar_aval_geral_evento.setRating(realScore);
 		this.evento_score = 0;
 		
+		this.bt_gps.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					telagps.putExtra("marcador", false);
+					telagps.putExtra("localiza", true);
+					telagps.putExtra("latitude", Double.parseDouble(lat));
+					telagps.putExtra("longitude", Double.parseDouble(lon));
+					startActivity(telagps);		
+			}
+		});
+		
+		this.bt_denuncia.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				denuncia.putExtra("id_ev_den", id);
+				denuncia.putExtra("login_den", login_recebe);
+				denuncia.putExtra("logado", logado);
+				startActivity(denuncia);
+			}
+		});
+		this.bt_comentar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				comentario.putExtra("id_ev", id);
+				comentario.putExtra("username", logado);
+				startActivity(comentario);
+			}
+		});
 		this.bt_aval_evento.setOnClickListener(handler); 
 			
 		this.e1.setOnClickListener(rb_handler);

@@ -10,10 +10,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,14 +25,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.example.wazzyeventos.jsonctrl.JSONParser;
-import com.example.wazzyeventos.model.Evento;
-import com.example.wazzyeventos.sqlite.MySQLiteHelper;
 
 
 public class telaListaEvento extends ActionBarActivity{
@@ -43,7 +38,6 @@ public class telaListaEvento extends ActionBarActivity{
 
 	public Context ctx;
 	public Intent consultaEvento;
-	
 
 	private ProgressDialog pDialog;
 	private JSONParser jsonP;
@@ -191,12 +185,6 @@ public class telaListaEvento extends ActionBarActivity{
 		}
 		
 		private void updateList(){
-			// For a ListActivity we need to set the List Adapter, and in order to do
-					//that, we need to create a ListAdapter.  This SimpleAdapter,
-					//will utilize our updated Hashmapped ArrayList, 
-					//use our single_post xml template for each item in our list,
-					//and place the appropriate info from the list to the
-					//correct GUI id.  Order is important here.
 					ListAdapter adapter = new SimpleAdapter(ctx, mCommentList, 
 							android.R.layout.simple_list_item_1, 
 							new String[] {TAG_NOME, TAG_LOCAL}, 
